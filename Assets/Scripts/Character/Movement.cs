@@ -11,6 +11,8 @@ public class Movement : MonoBehaviour
     [Header("Base Speed & Timer")]
     public float speed = 6.9f;
     public float jumpForce = 22f;
+    public float jumpStartTime;
+    private float jumpTime;
     public float rollForce = 22f;
     public static int rollingTimer = 14;
 
@@ -30,6 +32,7 @@ public class Movement : MonoBehaviour
     [Header("Authorization")]
     public static bool canJump = true;
     public static bool canRoll = true;
+    public static bool isJumping = false;
     public static bool isRolling = false;
     public static bool isDead = false;
     public static bool canMove = true;
@@ -92,9 +95,31 @@ public class Movement : MonoBehaviour
             rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
 
             if (GroundCheck.isGrounded && Input.GetButtonDown("Jump") && canJump){
+                isJumping = true;
+                jumpTime = jumpStartTime;
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                //rb.velocity = new Vector2(rb.velocity.x, 0);
+                //rb.velocity = new Vector2(1f * jumpForce, rb.velocity.y);
+            }
+            /*
+            if (GroundCheck.isGrounded && Input.GetButtonDown("Jump") && canJump){
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
             }
+            */
+
+            /*if(Input.GetButton("Jump") && isJumping){
+                if(jumpTime > 0){
+                    rb.velocity = new Vector2(1f * jumpForce, rb.velocity.y);
+                    jumpTime -=Time.deltaTime;
+                } else {
+                    isJumping = false;
+                }
+            }
+
+            if(Input.GetButtonUp("Jump")){
+                isJumping = false;
+            }*/
 
             if(GroundCheck.isGrounded){
                 anim.SetBool("isJumping", false);
@@ -109,7 +134,6 @@ public class Movement : MonoBehaviour
                     isRolling = true;
                     anim.SetBool("isRolling", true);
                     anim.SetBool("isJumping", false);
-                    anim.SetBool("isFalling", false);
                     anim.SetBool("isRunning", false);
                     rollingTimer = 0;
                     speed = speed*2f;
@@ -120,7 +144,6 @@ public class Movement : MonoBehaviour
                     isRolling = true;
                     anim.SetBool("isRolling", true);
                     anim.SetBool("isJumping", false);
-                    anim.SetBool("isFalling", false);
                     anim.SetBool("isRunning", false);
                     rollingTimer = 0;
                     speed = speed*2f;

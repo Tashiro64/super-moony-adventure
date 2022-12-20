@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PurpleWatsonCoin : MonoBehaviour
 {
 
-    public UnityEngine.Experimental.Rendering.Universal.Light2D Light;
+    public Light2D Light;
     public bool CanGrabPurpleCoin = false;
-
-    void FixedUpdate(){
-        Debug.Log(Config.fnc_GotPurpleCoin);
-    }
 
     void OnTriggerEnter2D(Collider2D other) {
 
@@ -21,6 +19,7 @@ public class PurpleWatsonCoin : MonoBehaviour
 
         if(other.gameObject.tag == "Player" && CanGrabPurpleCoin && !Config.fnc_GotPurpleCoin){
 
+            GameObject.Find("/Canvas/PurpleWatsonCoin").GetComponent<Image>().enabled = true;
             StartCoroutine(DespawnCoin());
             Config.fnc_GotPurpleCoin = true;
 
@@ -32,10 +31,11 @@ public class PurpleWatsonCoin : MonoBehaviour
         Destroy(GetComponent<Rigidbody2D>());
         Destroy(GetComponent<CircleCollider2D>());
         GetComponent<SpriteRenderer>().sprite = null;
-        Light = GetComponent<UnityEngine.Experimental.Rendering.Universal.Light2D>();
-
+        Light = GetComponent<Light2D>();
+        Light.intensity = 2.2f;
         while(Light.intensity > 0){
-            Light.intensity -= 0.02f;
+            Light.intensity -= 0.05f;
+            Light.pointLightOuterRadius += 0.05f;
             yield return new WaitForSeconds(0.02f); 
         }
         yield return null;

@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113cf7612aa406a4dbbbdcf40de1e258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Light: {fileID: 0}
+  Light: {fileID: 7665951499943679877}
   CanGrabPurpleCoin: 0
 --- !u!58 &1683103635012433002
 CircleCollider2D:
