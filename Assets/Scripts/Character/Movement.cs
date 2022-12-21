@@ -132,6 +132,7 @@ public class Movement : MonoBehaviour
                     canJump = false;
                     canRoll = false;
                     isRolling = true;
+                    anim.SetBool("isLookingLeft", false);
                     anim.SetBool("isRolling", true);
                     anim.SetBool("isJumping", false);
                     anim.SetBool("isRunning", false);
@@ -142,6 +143,7 @@ public class Movement : MonoBehaviour
                     canJump = false;
                     canRoll = false;
                     isRolling = true;
+                    anim.SetBool("isLookingLeft", true);
                     anim.SetBool("isRolling", true);
                     anim.SetBool("isJumping", false);
                     anim.SetBool("isRunning", false);

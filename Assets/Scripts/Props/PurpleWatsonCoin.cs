@@ -32,13 +32,13 @@ public class PurpleWatsonCoin : MonoBehaviour
         Destroy(GetComponent<CircleCollider2D>());
         GetComponent<SpriteRenderer>().sprite = null;
         Light = GetComponent<Light2D>();
-        Light.intensity = 2.2f;
+        Light.intensity = 1.2f;
         while(Light.intensity > 0){
             Light.intensity -= 0.05f;
             Light.pointLightOuterRadius += 0.05f;
             yield return new WaitForSeconds(0.02f); 
         }
-        yield return null;
+        transform.position = new Vector2(30000f,30000f);
     }
 
 }

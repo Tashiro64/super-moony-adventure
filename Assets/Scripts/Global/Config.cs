@@ -49,6 +49,7 @@ public class Config : MonoBehaviour
 
     void Start()
     {
+        //Time.timeScale = 0.1f;
         Character = GameObject.Find("/Character/Sprite");
         DeathVerticalLimit = GameObject.Find("/Globals/DeathBoundaries").transform.position.y;
         StartCoroutine(TimerDown());
