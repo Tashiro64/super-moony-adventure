@@ -13,12 +13,19 @@ public class TitleScreen : MonoBehaviour
     public Image opt_options;
     public Image opt_quit;
 
+    public Image moony;
+
+    public Sprite moony_frame_1;
+    public Sprite moony_frame_2;
+    public Sprite moony_frame_3;
+
     public bool canMove = true;
 
     public int menuPosition = 0;
 
     void Start()
     {
+        StartCoroutine(MoveMoony());
     }
 
     void Update()
@@ -92,6 +99,17 @@ public class TitleScreen : MonoBehaviour
             opt_quit.color = new Color(0f,1f,0.78f,1f);
         }
 
+    }
+
+    IEnumerator MoveMoony(){
+        while(true){
+            moony.sprite = moony_frame_1;
+            yield return new WaitForSeconds(0.2f);
+            moony.sprite = moony_frame_2;
+            yield return new WaitForSeconds(0.2f);
+            moony.sprite = moony_frame_3;
+            yield return new WaitForSeconds(0.2f);
+        }
     }
 
 }
