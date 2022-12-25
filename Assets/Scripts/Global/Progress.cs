@@ -5,7 +5,7 @@ using UnityEngine;
 public class Progress : MonoBehaviour
 {
 
-    void Start()
+    void Awake()
     {
         
         if(!PlayerPrefs.HasKey("continue")){
@@ -52,6 +52,7 @@ public class Progress : MonoBehaviour
             PlayerPrefs.SetInt("lottery20_obtained", 0);
 
             PlayerPrefs.SetInt("global_coins", 0);
+            PlayerPrefs.SetInt("global_finalDestination_unlocked", 0);
 
             PlayerPrefs.SetInt("continue", 1);
         } else {
