@@ -20,6 +20,8 @@ public class TitleScreen : MonoBehaviour
 
     public GameObject menu_main;
     public GameObject menu_option;
+    public GameObject menu_background;
+    public RectTransform volume_bar;
 
     public Image moony;
 
@@ -166,6 +168,22 @@ public class TitleScreen : MonoBehaviour
 
     }
 
+    void FixedUpdate(){
+        
+        if(inOptions && menuPositionOptions == 0){
+            if(Input.GetAxisRaw("Horizontal") > 0 && AudioListener.volume <= 1.0f){
+                AudioListener.volume += 0.01f;
+            }
+            if(Input.GetAxisRaw("Horizontal") < 0 && AudioListener.volume >= 0.0f){
+                AudioListener.volume -= 0.01f;
+            }
+                if(AudioListener.volume > 1) { AudioListener.volume = 1; }
+                if(AudioListener.volume < 0) { AudioListener.volume = 0; }
+                volume_bar.sizeDelta = new Vector2 (AudioListener.volume * 556.38f, 43.78f);
+        }
+
+    }
+
     void MenuSelect(){
 
         if(inOptions){
@@ -177,8 +195,10 @@ public class TitleScreen : MonoBehaviour
                 
             } else if(menuPositionOptions == 2){
                 inOptions = false;
+                iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                PlayerPrefs.SetFloat("global_volume", AudioListener.volume);
                 menuPosition = 4;
                 menuPositionOptions = 0;
             }
@@ -197,6 +217,7 @@ public class TitleScreen : MonoBehaviour
                 SceneManager.LoadScene("collection");
             } else if(menuPosition == 4){
                 inOptions = true;
+                iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 menuPosition = 0;

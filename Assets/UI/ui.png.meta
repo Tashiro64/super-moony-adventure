@@ -389,6 +389,9 @@ TextureImporter:
   - first:
       213: -5526609839277918587
     second: ui_128
+  - first:
+      213: -2279548600623069175
+    second: ui_129
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -3194,6 +3197,27 @@ TextureImporter:
       bones: []
       spriteID: 58639a5e1a98d43b0800000000000000
       internalID: -5526609839277918587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_129
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 60
+        width: 91
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9088f9310aa6d50e0800000000000000
+      internalID: -2279548600623069175
       vertices: []
       indices: 
       edges: []
