@@ -13,7 +13,7 @@ public class Spin : MonoBehaviour
     }
 
     void FixedUpdate(){
-        
+
         if(spinDirection == 1){
             transform.Rotate(0, 0, spinSpeed);
         } else {
@@ -21,4 +21,5 @@ public class Spin : MonoBehaviour
         }
             
     }
+
 }

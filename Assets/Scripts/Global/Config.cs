@@ -12,6 +12,9 @@ public class Config : MonoBehaviour
     public static GameObject Character;
     public static int Health = 3;
     public static int WatsonCoin = 0;
+    public static int WatsonCoin_nb1 = 0;
+    public static int WatsonCoin_nb2 = 0;
+    public static int WatsonCoin_nb3 = 0;
     public static int Coin = 0;
     public static int Timer = 400;
 
@@ -20,11 +23,6 @@ public class Config : MonoBehaviour
     public Sprite life_2;
     public Sprite life_1;
     public Sprite life_0;
-
-    public Sprite wcoin_3;
-    public Sprite wcoin_2;
-    public Sprite wcoin_1;
-    public Sprite wcoin_0;
 
     public Sprite number_0;
     public Sprite number_1;
@@ -47,9 +45,18 @@ public class Config : MonoBehaviour
     public static bool fnc_GotPurpleCoin = false;
     public static bool fnc_GotPurpleCoinSpawn = false;
 
+    void Awake(){
+              
+        //load currently obtained Watson Coins
+        if(PlayerPrefs.GetInt("stage" + LevelId + "_wc1") == 1) { WatsonCoin_nb1 = 1; WatsonCoin++; }
+        if(PlayerPrefs.GetInt("stage" + LevelId + "_wc2") == 1) { WatsonCoin_nb2 = 1; WatsonCoin++; }
+        if(PlayerPrefs.GetInt("stage" + LevelId + "_wc3") == 1) { WatsonCoin_nb3 = 1; WatsonCoin++; }
+        Config.fnc_UpdateWatsonCoin = true;
+        
+    }
+
     void Start()
     {
-        //Time.timeScale = 0.1f;
         Character = GameObject.Find("/Character/Sprite");
         DeathVerticalLimit = GameObject.Find("/Globals/DeathBoundaries").transform.position.y;
         StartCoroutine(TimerDown());
@@ -85,11 +92,16 @@ public class Config : MonoBehaviour
             if(WatsonCoin > 3){ WatsonCoin = 3; }
             if(WatsonCoin < 0){ WatsonCoin = 0; }
 
-            Image wcoin = GameObject.Find("/Canvas/WatsonCoin").GetComponent<Image>();
-            if(WatsonCoin == 3){ wcoin.sprite = wcoin_3; }
-            if(WatsonCoin == 2){ wcoin.sprite = wcoin_2; }
-            if(WatsonCoin == 1){ wcoin.sprite = wcoin_1; }
-            if(WatsonCoin == 0){ wcoin.sprite = wcoin_0; }
+            if(Config.WatsonCoin_nb1 == 1){
+                GameObject.Find("/Canvas/WatsonCoin/wc1").SetActive(true);
+            }
+            if(Config.WatsonCoin_nb2 == 1){
+                GameObject.Find("/Canvas/WatsonCoin/wc2").SetActive(true);
+            }
+            if(Config.WatsonCoin_nb3 == 1){
+                GameObject.Find("/Canvas/WatsonCoin/wc3").SetActive(true);
+            }
+
             Config.fnc_UpdateWatsonCoin = false;
         }
 

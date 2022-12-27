@@ -20,6 +20,7 @@ public class TitleScreen : MonoBehaviour
 
     public GameObject menu_main;
     public GameObject menu_option;
+    public GameObject menu_collection;
     public GameObject menu_background;
     public RectTransform volume_bar;
 
@@ -34,6 +35,7 @@ public class TitleScreen : MonoBehaviour
     public Color lockedColor;
 
     public bool inOptions = false;
+    public bool inCollection = false;
 
     public int menuPosition = 0;
     public int menuPositionOptions = 0;
@@ -60,7 +62,9 @@ public class TitleScreen : MonoBehaviour
             MenuSelect();
         }
 
-        if(inOptions){
+        if(inCollection){
+
+        } else if(inOptions){
             if(Input.GetAxisRaw("Vertical") > 0 && canMove){
                 menuPositionOptions--;
                 canMove = false;
@@ -106,7 +110,9 @@ public class TitleScreen : MonoBehaviour
             canMove = true;
         }
 
-        if(inOptions){
+        if(inCollection){
+
+        } else if(inOptions){
             if(menuPositionOptions == 0){
                 opt_masterVolume.color = new Color(0f,1f,0.78f,1f);
                 opt_eraseData.color = new Color(1f,1f,1f,1f);
@@ -186,7 +192,16 @@ public class TitleScreen : MonoBehaviour
 
     void MenuSelect(){
 
-        if(inOptions){
+        if(inCollection){
+            inOptions = false;
+            inCollection = false;
+            iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+            iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+            iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+            iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+            menuPosition = 3;
+            menuPositionOptions = 0;
+        } else if(inOptions){
             if(menuPositionOptions == 0){
                 Debug.Log("MASTER VOLUME");
                 
@@ -195,7 +210,9 @@ public class TitleScreen : MonoBehaviour
                 
             } else if(menuPositionOptions == 2){
                 inOptions = false;
+                inCollection = false;
                 iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 PlayerPrefs.SetFloat("global_volume", AudioListener.volume);
@@ -213,11 +230,23 @@ public class TitleScreen : MonoBehaviour
                 Debug.Log("LOTTERY");
                 SceneManager.LoadScene("lottery");
             } else if(menuPosition == 3){
-                Debug.Log("COLLECTION");
-                SceneManager.LoadScene("collection");
-            } else if(menuPosition == 4){
-                inOptions = true;
+                menu_collection.SetActive(true);
+                menu_option.SetActive(false);
+                inOptions = false;
+                inCollection = true;
                 iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                menuPosition = 0;
+                menuPositionOptions = 0;
+            } else if(menuPosition == 4){
+                menu_collection.SetActive(false);
+                menu_option.SetActive(true);
+                inOptions = true;
+                inCollection = false;
+                iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 menuPosition = 0;

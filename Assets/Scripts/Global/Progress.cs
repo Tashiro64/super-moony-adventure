@@ -21,14 +21,45 @@ public class Progress : MonoBehaviour
             PlayerPrefs.SetInt("stage7_completed", 0);
             PlayerPrefs.SetInt("stage8_completed", 0);
             
-            PlayerPrefs.SetInt("stage1_nbCoins", 0);
-            PlayerPrefs.SetInt("stage2_nbCoins", 0);
-            PlayerPrefs.SetInt("stage3_nbCoins", 0);
-            PlayerPrefs.SetInt("stage4_nbCoins", 0);
-            PlayerPrefs.SetInt("stage5_nbCoins", 0);
-            PlayerPrefs.SetInt("stage6_nbCoins", 0);
-            PlayerPrefs.SetInt("stage7_nbCoins", 0);
-            PlayerPrefs.SetInt("stage8_nbCoins", 0);
+            PlayerPrefs.SetInt("stage1_wc1", 0);
+            PlayerPrefs.SetInt("stage1_wc2", 0);
+            PlayerPrefs.SetInt("stage1_wc3", 0);
+            PlayerPrefs.SetInt("stage1_pwc", 0);
+
+            PlayerPrefs.SetInt("stage2_wc1", 0);
+            PlayerPrefs.SetInt("stage2_wc2", 0);
+            PlayerPrefs.SetInt("stage2_wc3", 0);
+            PlayerPrefs.SetInt("stage2_pwc", 0);
+
+            PlayerPrefs.SetInt("stage3_wc1", 0);
+            PlayerPrefs.SetInt("stage3_wc2", 0);
+            PlayerPrefs.SetInt("stage3_wc3", 0);
+            PlayerPrefs.SetInt("stage3_pwc", 0);
+
+            PlayerPrefs.SetInt("stage4_wc1", 0);
+            PlayerPrefs.SetInt("stage4_wc2", 0);
+            PlayerPrefs.SetInt("stage4_wc3", 0);
+            PlayerPrefs.SetInt("stage4_pwc", 0);
+
+            PlayerPrefs.SetInt("stage5_wc1", 0);
+            PlayerPrefs.SetInt("stage5_wc2", 0);
+            PlayerPrefs.SetInt("stage5_wc3", 0);
+            PlayerPrefs.SetInt("stage5_pwc", 0);
+
+            PlayerPrefs.SetInt("stage6_wc1", 0);
+            PlayerPrefs.SetInt("stage6_wc2", 0);
+            PlayerPrefs.SetInt("stage6_wc3", 0);
+            PlayerPrefs.SetInt("stage6_pwc", 0);
+
+            PlayerPrefs.SetInt("stage7_wc1", 0);
+            PlayerPrefs.SetInt("stage7_wc2", 0);
+            PlayerPrefs.SetInt("stage7_wc3", 0);
+            PlayerPrefs.SetInt("stage7_pwc", 0);
+
+            PlayerPrefs.SetInt("stage8_wc1", 0);
+            PlayerPrefs.SetInt("stage8_wc2", 0);
+            PlayerPrefs.SetInt("stage8_wc3", 0);
+            PlayerPrefs.SetInt("stage8_pwc", 0);
 
             PlayerPrefs.SetInt("lottery1_obtained", 0);
             PlayerPrefs.SetInt("lottery2_obtained", 0);
@@ -52,6 +83,7 @@ public class Progress : MonoBehaviour
             PlayerPrefs.SetInt("lottery20_obtained", 0);
 
             PlayerPrefs.SetInt("global_coins", 0);
+            PlayerPrefs.SetInt("available_coins", 0);
             PlayerPrefs.SetInt("global_finalDestination_unlocked", 0);
             PlayerPrefs.SetFloat("global_volume", 1f);
 
@@ -60,8 +92,9 @@ public class Progress : MonoBehaviour
             Debug.Log("CONTINUE");
         }
 
+        //load volume data
         AudioListener.volume = PlayerPrefs.GetFloat("global_volume");
-        
+
     }
 
 
