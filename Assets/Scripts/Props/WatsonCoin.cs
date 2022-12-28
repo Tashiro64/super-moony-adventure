@@ -10,9 +10,6 @@ public class WatsonCoin : MonoBehaviour
     public Light2D Light;
 
     void Start(){
-        Debug.Log(Config.WatsonCoin_nb1);
-        Debug.Log(Config.WatsonCoin_nb2);
-        Debug.Log(Config.WatsonCoin_nb3);
         if(Config.WatsonCoin_nb1 == 1 && coinNumber == 1){
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0.2f);
         }

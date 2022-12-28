@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.832
+    m_Value: 0.8
     min: 0
     max: 1
   response:
@@ -86,11 +86,11 @@ MonoBehaviour:
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 4.5
+    m_Value: 2.8
     min: 0
   scatter:
     m_OverrideState: 1
-    m_Value: 0.138
+    m_Value: 0.39
     min: 0
     max: 1
   clamp:
@@ -108,7 +108,7 @@ MonoBehaviour:
     m_Value: 1
   skipIterations:
     m_OverrideState: 0
-    m_Value: 3
+    m_Value: 5
     min: 0
     max: 16
   dirtTexture:
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.173
+    m_Value: 0.13
     min: 0
     max: 1
 --- !u!114 &8547945565789824661
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.3
+    m_Value: 0.21
     min: -1
     max: 1
   xMultiplier:

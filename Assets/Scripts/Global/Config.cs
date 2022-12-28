@@ -15,6 +15,7 @@ public class Config : MonoBehaviour
     public static int WatsonCoin_nb1 = 0;
     public static int WatsonCoin_nb2 = 0;
     public static int WatsonCoin_nb3 = 0;
+    public static int PurpleWatsonCoin = 0;
     public static int Coin = 0;
     public static int Timer = 400;
 
@@ -47,12 +48,13 @@ public class Config : MonoBehaviour
 
     void Awake(){
               
-        //load currently obtained Watson Coins
+        //load currently obtained Purple / Watson Coins
+        if(PlayerPrefs.GetInt("stage" + LevelId + "_pwc") == 1) { PurpleWatsonCoin = 1; }
         if(PlayerPrefs.GetInt("stage" + LevelId + "_wc1") == 1) { WatsonCoin_nb1 = 1; WatsonCoin++; }
         if(PlayerPrefs.GetInt("stage" + LevelId + "_wc2") == 1) { WatsonCoin_nb2 = 1; WatsonCoin++; }
         if(PlayerPrefs.GetInt("stage" + LevelId + "_wc3") == 1) { WatsonCoin_nb3 = 1; WatsonCoin++; }
         Config.fnc_UpdateWatsonCoin = true;
-        
+
     }
 
     void Start()
@@ -100,6 +102,9 @@ public class Config : MonoBehaviour
             }
             if(Config.WatsonCoin_nb3 == 1){
                 GameObject.Find("/Canvas/WatsonCoin/wc3").SetActive(true);
+            }
+            if(Config.PurpleWatsonCoin == 1){
+                GameObject.Find("/Canvas/WatsonCoin/PurpleWatsonCoin").SetActive(true);
             }
 
             Config.fnc_UpdateWatsonCoin = false;

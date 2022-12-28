@@ -19,7 +19,7 @@ public class PurpleWatsonCoin : MonoBehaviour
 
         if(other.gameObject.tag == "Player" && CanGrabPurpleCoin && !Config.fnc_GotPurpleCoin){
 
-            GameObject.Find("/Canvas/PurpleWatsonCoin").GetComponent<Image>().enabled = true;
+            GameObject.Find("/Canvas/WatsonCoin/PurpleWatsonCoin").SetActive(true);
             StartCoroutine(DespawnCoin());
             Config.fnc_GotPurpleCoin = true;
 

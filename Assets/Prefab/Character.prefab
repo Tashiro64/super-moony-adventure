@@ -213,6 +213,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6.9
   jumpForce: 22
+  jumpStartTime: 0
   rollForce: 22
   horizontalInput: 0
   verticalInput: 0
