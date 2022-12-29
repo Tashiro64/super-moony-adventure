@@ -28,6 +28,8 @@ public class Movement : MonoBehaviour
     public LayerMask groundLayer;
     public GameObject groundCheck;
     public static GameObject backLayer;
+    public GameObject StageBackground;
+    public GameObject Camera;
     
     [Header("Authorization")]
     public static bool canJump = true;
@@ -71,6 +73,9 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+        //work background
+        StageBackground.transform.position = new Vector3((Camera.transform.position.x /1.1f)+30f, (Camera.transform.position.y / 1.3f)+2f, 14.3f);
+
         if(haveControl){
 
             if(!isRolling){

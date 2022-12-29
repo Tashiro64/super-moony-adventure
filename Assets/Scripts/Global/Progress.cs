@@ -87,6 +87,7 @@ public class Progress : MonoBehaviour
             PlayerPrefs.SetInt("lottery19_obtained", 0);
             PlayerPrefs.SetInt("lottery20_obtained", 0);
 
+            PlayerPrefs.SetInt("death_count", 0);
             PlayerPrefs.SetInt("global_coins", 0);
             PlayerPrefs.SetInt("available_coins", 0);
             PlayerPrefs.SetInt("global_finalDestination_unlocked", 0);

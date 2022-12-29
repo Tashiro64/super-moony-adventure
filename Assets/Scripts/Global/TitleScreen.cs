@@ -361,6 +361,63 @@ public class TitleScreen : MonoBehaviour
         if(PlayerPrefs.GetInt("global_finalDestination_completed") == 1){ GlobalProgress++; }
 
 
+        //death count coins
+        int tmpDeathCount = PlayerPrefs.GetInt("death_count",0);
+        if(tmpDeathCount > 99999999) { tmpDeathCount = 99999999; PlayerPrefs.SetInt("death_count",tmpDeathCount); }
+        string death = tmpDeathCount.ToString("d8");
+        string[] deathArray = new string[death.Length];
+
+        for (int i = 0; i < death.Length; i++) {
+            deathArray[i] = death[i].ToString();
+            if(deathArray[i] == "9"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_9; }
+            if(deathArray[i] == "8"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_8; }
+            if(deathArray[i] == "7"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_7; }
+            if(deathArray[i] == "6"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_6; }
+            if(deathArray[i] == "5"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_5; }
+            if(deathArray[i] == "4"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_4; }
+            if(deathArray[i] == "3"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_3; }
+            if(deathArray[i] == "2"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_2; }
+            if(deathArray[i] == "1"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_1; }
+            if(deathArray[i] == "0"){ GameObject.Find("/Canvas/Collection Menu/death_count/count_"+(i+1)).GetComponent<Image>().sprite = number_0; }
+        }
+        
+        if(PlayerPrefs.GetInt("death_count") <= 10000000 && deathArray[0] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_1").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_1").SetActive(true);
+        }
+        if(PlayerPrefs.GetInt("death_count") <= 1000000 && deathArray[1] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_2").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_2").SetActive(true);
+        }
+        if(PlayerPrefs.GetInt("death_count") <= 100000 && deathArray[2] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_3").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_3").SetActive(true);
+        }
+        if(PlayerPrefs.GetInt("death_count") <= 10000 && deathArray[3] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_4").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_4").SetActive(true);
+        }
+        if(PlayerPrefs.GetInt("death_count") <= 1000 && deathArray[4] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_5").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_5").SetActive(true);
+        }
+        if(PlayerPrefs.GetInt("death_count") <= 100 && deathArray[5] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_6").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_6").SetActive(true);
+        }
+        if(PlayerPrefs.GetInt("death_count") <= 10 && deathArray[6] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_7").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/death_count/count_7").SetActive(true);
+        }
+
+        
         //available coins
         int tmpAvailableCoins = PlayerPrefs.GetInt("available_coins",0);
         if(tmpAvailableCoins > 99999999) { tmpAvailableCoins = 99999999; PlayerPrefs.SetInt("available_coins",tmpAvailableCoins); }

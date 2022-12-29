@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f023b0e90b67a9447ab0ab358046d138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinNumber: 1
+  Light: {fileID: 0}
 --- !u!82 &4764711970367012713
 AudioSource:
   m_ObjectHideFlags: 0
@@ -123,7 +125,7 @@ AudioSource:
   m_GameObject: {fileID: 2043799314394770615}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7768827cf966b64aa7e2f28dd12e94d, type: 2}
   m_audioClip: {fileID: 8300000, guid: 01a2c644333e4964390c14fa4a4b2618, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

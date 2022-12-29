@@ -17,7 +17,7 @@ public class PurpleWatsonCoin : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Default");
         }
 
-        if(other.gameObject.tag == "Player" && CanGrabPurpleCoin && !Config.fnc_GotPurpleCoin){
+        if(other.gameObject.tag == "Player" && CanGrabPurpleCoin && !Config.fnc_GotPurpleCoin && Config.Health > 0){
 
             GameObject.Find("/Canvas/WatsonCoin/PurpleWatsonCoin").SetActive(true);
             StartCoroutine(DespawnCoin());
