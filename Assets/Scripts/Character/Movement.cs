@@ -73,6 +73,7 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
+
         //work background
         StageBackground.transform.position = new Vector3((Camera.transform.position.x /1.1f)+30f, (Camera.transform.position.y / 1.3f)+2f, 14.3f);
 

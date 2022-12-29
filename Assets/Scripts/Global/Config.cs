@@ -45,6 +45,8 @@ public class Config : MonoBehaviour
     public static bool fnc_UpdateCoin = false;
     public static bool fnc_GotPurpleCoin = false;
     public static bool fnc_GotPurpleCoinSpawn = false;
+    public static bool fnc_DeadCoroutine = false;
+    public static bool fnc_isPaused = false;
 
     void Awake(){
               
@@ -65,14 +67,27 @@ public class Config : MonoBehaviour
 
     }
 
+    void Update()
+    {
+        
+        //Pause Config
+        if(!fnc_isPaused && !Movement.isDead && Input.GetButtonDown("Start")){
+            Time.timeScale = 0f;
+            Movement.haveControl = false;
+            fnc_isPaused = true;
+        } else if(fnc_isPaused && !Movement.isDead && Input.GetButtonDown("Start")){
+            Time.timeScale = 1f;
+            fnc_isPaused = false;
+            Movement.haveControl = true;
+        }
+
+    }
+
     void FixedUpdate()
     {
 
         //Kill player if his Y coordonate are under the limit gameobject
         if(Character.transform.position.y < DeathVerticalLimit && !Movement.isDead){
-            Movement.haveControl = false;
-            Health = 0;
-            Config.fnc_UpdateHealth = true;
             Movement.isDead = true; 
         }
 
@@ -145,8 +160,9 @@ public class Config : MonoBehaviour
         }
 
         //if dead, deadise lé
-        if(Movement.isDead){
-            //mourraise
+        if( (Config.Health <= 0 || Movement.isDead) && !fnc_DeadCoroutine){
+            StartCoroutine(CallDeath());
+            fnc_DeadCoroutine = true;
         }
     }
 
@@ -210,8 +226,11 @@ public class Config : MonoBehaviour
 
     }
 
-    void CallDeath(){
-
+    IEnumerator CallDeath(){
+        Config.Health = 0;
+        Movement.haveControl = false;
+        Config.fnc_UpdateHealth = true;
+        yield return new WaitForSeconds(0.3f);
     }
 
 }
