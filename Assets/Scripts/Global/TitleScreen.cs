@@ -107,7 +107,13 @@ public class TitleScreen : MonoBehaviour
         
         if(!splashScreenDone){
             //splash screen
-            StartCoroutine(SplashScreen());
+            if(GameObject.Find("/Canvas/Preload/Image").GetComponent<Image>().color.a > 0f){
+                StartCoroutine(SplashScreen());
+            } else {
+                //skip splash screen for debugging purpose
+                blockControl = false;
+                splashScreenDone = true;
+            }
         }
 
 
@@ -410,7 +416,7 @@ public class TitleScreen : MonoBehaviour
         beat final destination = 1 points;
         total points = 70;
         */
-        int totalPointNeeded = 70;
+        int totalPointNeeded = 75;
 
         int GlobalProgress = 0;
         int TrophyProgress = 0;
@@ -437,6 +443,7 @@ public class TitleScreen : MonoBehaviour
         if(PlayerPrefs.GetInt("stage3_wc1") == 1){ GlobalProgress++; GameObject.Find("/Canvas/Collection Menu/level3/wc1").SetActive(true); }
         if(PlayerPrefs.GetInt("stage3_wc2") == 1){ GlobalProgress++; GameObject.Find("/Canvas/Collection Menu/level3/wc2").SetActive(true); }
         if(PlayerPrefs.GetInt("stage3_wc3") == 1){ GlobalProgress++; GameObject.Find("/Canvas/Collection Menu/level3/wc3").SetActive(true); }
+        if(PlayerPrefs.GetInt("stage3_pwc") == 1){ GlobalProgress++; GameObject.Find("/Canvas/Collection Menu/level3/pwc").SetActive(true); }
 
         if(PlayerPrefs.GetInt("stage4_wc1") == 1){ GlobalProgress++; GameObject.Find("/Canvas/Collection Menu/level4/wc1").SetActive(true); }
         if(PlayerPrefs.GetInt("stage4_wc2") == 1){ GlobalProgress++; GameObject.Find("/Canvas/Collection Menu/level4/wc2").SetActive(true); }
@@ -675,10 +682,68 @@ public class TitleScreen : MonoBehaviour
             GameObject.Find("/Canvas/Collection Menu/collected_coins/count_7").SetActive(true);
         }
 
+
+
+        //trophies
+        string col_trophy = TrophyProgress.ToString("00");
+        string[] col_trophyArray = new string[col_trophy.Length];
+
+        for (int i = 0; i < col_trophy.Length; i++) {
+            col_trophyArray[i] = col_trophy[i].ToString();
+            if(col_trophyArray[i] == "9"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_9; }
+            if(col_trophyArray[i] == "8"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_8; }
+            if(col_trophyArray[i] == "7"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_7; }
+            if(col_trophyArray[i] == "6"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_6; }
+            if(col_trophyArray[i] == "5"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_5; }
+            if(col_trophyArray[i] == "4"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_4; }
+            if(col_trophyArray[i] == "3"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_3; }
+            if(col_trophyArray[i] == "2"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_2; }
+            if(col_trophyArray[i] == "1"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_1; }
+            if(col_trophyArray[i] == "0"){ GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_"+(i+1)).GetComponent<Image>().sprite = number_0; }
+        }
+        
+        if(TrophyProgress <= 10 && col_trophyArray[0] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_1").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/collected_trophies/count_1").SetActive(true);
+        }
+
+
+        //completion percentage
         float percent = Mathf.Ceil(GlobalProgress * 100 / totalPointNeeded);
 
         if(percent < 0) { percent = 0; }
         if(percent > 100) { percent = 100; }
+        
+        string col_percent = percent.ToString("000");
+        string[] col_percentArray = new string[col_percent.Length];
+
+        for (int i = 0; i < col_percent.Length; i++) {
+            col_percentArray[i] = col_percent[i].ToString();
+            if(col_percentArray[i] == "9"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_9; }
+            if(col_percentArray[i] == "8"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_8; }
+            if(col_percentArray[i] == "7"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_7; }
+            if(col_percentArray[i] == "6"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_6; }
+            if(col_percentArray[i] == "5"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_5; }
+            if(col_percentArray[i] == "4"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_4; }
+            if(col_percentArray[i] == "3"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_3; }
+            if(col_percentArray[i] == "2"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_2; }
+            if(col_percentArray[i] == "1"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_1; }
+            if(col_percentArray[i] == "0"){ GameObject.Find("/Canvas/Collection Menu/global_completion/count_"+(i+1)).GetComponent<Image>().sprite = number_0; }
+        }
+        
+        
+        if(percent <= 100 && col_percentArray[0] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/global_completion/count_1").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/global_completion/count_1").SetActive(true);
+        }
+        if(percent <= 10 && col_percentArray[1] == "0"){
+            GameObject.Find("/Canvas/Collection Menu/global_completion/count_2").SetActive(false);
+        } else {
+            GameObject.Find("/Canvas/Collection Menu/global_completion/count_2").SetActive(true);
+        }
+
 
     }
 
