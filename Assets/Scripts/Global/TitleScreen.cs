@@ -9,10 +9,14 @@ public class TitleScreen : MonoBehaviour
 
     public Image opt_adventureMode;
     public Image opt_finalDestination;
+    public Image opt_breakTheTarget;
     public Image opt_lottery;
     public Image opt_collection;
     public Image opt_options;
     public Image opt_quit;
+
+    public Image opt_erase_yes;
+    public Image opt_erase_no;
 
     public Image opt_masterVolume;
     public Image opt_eraseData;
@@ -22,9 +26,15 @@ public class TitleScreen : MonoBehaviour
     public GameObject menu_option;
     public GameObject menu_collection;
     public GameObject menu_background;
+    public GameObject menu_confirm;
+    
     public RectTransform volume_bar;
 
     public Image moony;
+
+    public AudioSource moveSoundSource;
+    public AudioClip moveSound;
+    public AudioClip confirmSound;
 
     public Sprite moony_frame_1;
     public Sprite moony_frame_2;
@@ -32,13 +42,19 @@ public class TitleScreen : MonoBehaviour
 
     public bool canMove = true;
     public int isFinalDestinationUnlocked = 0;
+    public int isBreakTheTargetUnlocked = 0;
     public Color lockedColor;
+    public Color lockedColorBTT;
 
     public bool inOptions = false;
     public bool inCollection = false;
+    public bool inEraseConfirm = false;
+    public bool blockControl = false;
+    public bool splashScreenDone = false;
 
     public int menuPosition = 0;
     public int menuPositionOptions = 0;
+    public int menuPositionErase = 1;
 
     public Sprite number_0;
     public Sprite number_1;
@@ -51,135 +67,229 @@ public class TitleScreen : MonoBehaviour
     public Sprite number_8;
     public Sprite number_9;
 
+    public GameObject SplashScreen_T;
+    public GameObject SplashScreen_A;
+    public GameObject SplashScreen_S; 
+    public GameObject SplashScreen_H;
+    public GameObject SplashScreen_I;
+    public GameObject SplashScreen_R;
+    public GameObject SplashScreen_O;
+
+    public GameObject Presents_P;
+    public GameObject Presents_R;
+    public GameObject Presents_E;
+    public GameObject Presents_S;
+    public GameObject Presents_E2;
+    public GameObject Presents_N;
+    public GameObject Presents_T;
+    public GameObject Presents_S2;
+
+    public AudioClip oopelay;
+
     void Start()
     {
 
         isFinalDestinationUnlocked = PlayerPrefs.GetInt("global_finalDestination_unlocked", 0);
+        isBreakTheTargetUnlocked = PlayerPrefs.GetInt("global_breakTheTarget_unlocked", 0);
 
         if(isFinalDestinationUnlocked == 1){
             lockedColor = new Color(1f,1f,1f,1f);
         } else {
             lockedColor = new Color(0.5f,0.5f,0.5f,1f);
         }
+        if(isBreakTheTargetUnlocked == 1){
+            lockedColorBTT = new Color(1f,1f,1f,1f);
+        } else {
+            lockedColorBTT = new Color(0.5f,0.5f,0.5f,1f);
+        }
 
         StartCoroutine(MoveMoony());
+        
+        if(!splashScreenDone){
+            //splash screen
+            StartCoroutine(SplashScreen());
+        }
+
 
     }
 
     void Update()
     {
 
-        if(Input.GetButtonDown("Jump")){
-            MenuSelect();
-        }
-
-        if(inCollection){
-
-        } else if(inOptions){
-            if(Input.GetAxisRaw("Vertical") > 0 && canMove){
-                menuPositionOptions--;
-                canMove = false;
-            }
-            if(Input.GetAxisRaw("Vertical") < 0 && canMove){
-                menuPositionOptions++;
-                canMove = false;
+        if(!blockControl){
+            if(Input.GetButtonDown("Submit")){
+                MenuSelect();
             }
 
-            if(menuPositionOptions < 0){
-                menuPositionOptions = 0;
-            }
-            if(menuPositionOptions > 2){
-                menuPositionOptions = 2;
-            }
-        } else {
-            if(Input.GetAxisRaw("Vertical") > 0 && canMove){
-                menuPosition--;
-                if(isFinalDestinationUnlocked == 0 && menuPosition == 1){
+            if(inCollection){
+
+            } else if(inOptions){
+                if(inEraseConfirm){
+                    if(Input.GetAxisRaw("Vertical") > 0 && canMove){
+                        menuPositionErase--;
+                        moveSoundSource.clip = moveSound;
+                        moveSoundSource.Play();
+                        canMove = false;
+                    }
+                    if(Input.GetAxisRaw("Vertical") < 0 && canMove){
+                        menuPositionErase++;
+                        moveSoundSource.clip = moveSound;
+                        moveSoundSource.Play();
+                        canMove = false;
+                    }
+
+                    if(menuPositionErase < 0){
+                        menuPositionErase = 0;
+                    }
+                    if(menuPositionErase > 1){
+                        menuPositionErase = 1;
+                    }
+                } else {
+                    if(Input.GetAxisRaw("Vertical") > 0 && canMove){
+                        menuPositionOptions--;
+                        moveSoundSource.clip = moveSound;
+                        moveSoundSource.Play();
+                        canMove = false;
+                    }
+                    if(Input.GetAxisRaw("Vertical") < 0 && canMove){
+                        menuPositionOptions++;
+                        moveSoundSource.clip = moveSound;
+                        moveSoundSource.Play();
+                        canMove = false;
+                    }
+
+                    if(menuPositionOptions < 0){
+                        menuPositionOptions = 0;
+                    }
+                    if(menuPositionOptions > 2){
+                        menuPositionOptions = 2;
+                    }
+                }
+            } else {
+                if(Input.GetAxisRaw("Vertical") > 0 && canMove){
                     menuPosition--;
+                    moveSoundSource.clip = moveSound;
+                    moveSoundSource.Play();
+                    if(isBreakTheTargetUnlocked == 0 && menuPosition == 2){
+                        
+                        menuPosition--;
+                    }
+                    if(isFinalDestinationUnlocked == 0 && menuPosition == 1){
+                        menuPosition--;
+                    }
+                    canMove = false;
                 }
-                canMove = false;
-            }
-            if(Input.GetAxisRaw("Vertical") < 0 && canMove){
-                menuPosition++;
-                if(isFinalDestinationUnlocked == 0 && menuPosition == 1){
+                if(Input.GetAxisRaw("Vertical") < 0 && canMove){
                     menuPosition++;
+                    moveSoundSource.clip = moveSound;
+                    moveSoundSource.Play();
+                    if(isFinalDestinationUnlocked == 0 && menuPosition == 1){
+                        menuPosition++;
+                    }
+                    if(isBreakTheTargetUnlocked == 0 && menuPosition == 2){
+                        menuPosition++;
+                    }
+                    canMove = false;
                 }
-                canMove = false;
+
+                if(menuPosition < 0){
+                    menuPosition = 0;
+                }
+                if(menuPosition > 6){
+                    menuPosition = 6;
+                }
             }
 
-            if(menuPosition < 0){
-                menuPosition = 0;
+        
+
+            if(Input.GetAxisRaw("Vertical") == 0 && !canMove){
+                canMove = true;
             }
-            if(menuPosition > 5){
-                menuPosition = 5;
-            }
-        }
 
-       
+            if(inCollection){
 
-        if(Input.GetAxisRaw("Vertical") == 0 && !canMove){
-            canMove = true;
-        }
-
-        if(inCollection){
-
-        } else if(inOptions){
-            if(menuPositionOptions == 0){
-                opt_masterVolume.color = new Color(0f,1f,0.78f,1f);
-                opt_eraseData.color = new Color(1f,1f,1f,1f);
-                opt_backToMenu.color = new Color(1f,1f,1f,1f);
-            } else if(menuPositionOptions == 1){
-                opt_masterVolume.color = new Color(1f,1f,1f,1f);
-                opt_eraseData.color = new Color(0f,1f,0.78f,1f);
-                opt_backToMenu.color = new Color(1f,1f,1f,1f);
-            } else if(menuPositionOptions == 2){
-                opt_masterVolume.color = new Color(1f,1f,1f,1f);
-                opt_eraseData.color = new Color(1f,1f,1f,1f);
-                opt_backToMenu.color = new Color(0f,1f,0.78f,1f);
-            }
-        } else {
-            if(menuPosition == 0){
-                opt_adventureMode.color = new Color(0f,1f,0.78f,1f);
-                opt_finalDestination.color = lockedColor;
-                opt_lottery.color = new Color(1f,1f,1f,1f);
-                opt_collection.color = new Color(1f,1f,1f,1f);
-                opt_options.color = new Color(1f,1f,1f,1f);
-                opt_quit.color = new Color(1f,1f,1f,1f);
-            } else if(menuPosition == 1){
-                opt_adventureMode.color =  new Color(1f,1f,1f,1f);
-                opt_finalDestination.color = new Color(0f,1f,0.78f,1f);
-                opt_lottery.color = new Color(1f,1f,1f,1f);
-                opt_collection.color = new Color(1f,1f,1f,1f);
-                opt_options.color = new Color(1f,1f,1f,1f);
-                opt_quit.color = new Color(1f,1f,1f,1f);
-            } else if(menuPosition == 2){
-                opt_adventureMode.color =  new Color(1f,1f,1f,1f);
-                opt_finalDestination.color = lockedColor;
-                opt_lottery.color = new Color(0f,1f,0.78f,1f);
-                opt_collection.color = new Color(1f,1f,1f,1f);
-                opt_options.color = new Color(1f,1f,1f,1f);
-                opt_quit.color = new Color(1f,1f,1f,1f);
-            } else if(menuPosition == 3){
-                opt_adventureMode.color =  new Color(1f,1f,1f,1f);
-                opt_finalDestination.color = lockedColor;
-                opt_lottery.color = new Color(1f,1f,1f,1f);
-                opt_collection.color = new Color(0f,1f,0.78f,1f);
-                opt_options.color = new Color(1f,1f,1f,1f);
-                opt_quit.color = new Color(1f,1f,1f,1f);
-            } else if(menuPosition == 4){
-                opt_adventureMode.color =  new Color(1f,1f,1f,1f);
-                opt_finalDestination.color = lockedColor;
-                opt_lottery.color = new Color(1f,1f,1f,1f);
-                opt_collection.color = new Color(1f,1f,1f,1f);
-                opt_options.color = new Color(0f,1f,0.78f,1f);
-                opt_quit.color = new Color(1f,1f,1f,1f);
-            } else if(menuPosition == 5){
-                opt_adventureMode.color =  new Color(1f,1f,1f,1f);
-                opt_finalDestination.color = lockedColor;
-                opt_lottery.color = new Color(1f,1f,1f,1f);
-                opt_collection.color = new Color(1f,1f,1f,1f);
-                opt_options.color = new Color(1f,1f,1f,1f);
-                opt_quit.color = new Color(0f,1f,0.78f,1f);
+            } else if(inOptions){
+                if(inEraseConfirm){
+                    if(menuPositionErase == 0){
+                        opt_erase_yes.color = new Color(0f,1f,0.78f,1f);
+                        opt_erase_no.color = new Color(1f,1f,1f,1f);
+                    } else if(menuPositionErase == 1){
+                        opt_erase_yes.color = new Color(1f,1f,1f,1f);
+                        opt_erase_no.color = new Color(0f,1f,0.78f,1f);
+                    }
+                } else {
+                    if(menuPositionOptions == 0){
+                        opt_masterVolume.color = new Color(0f,1f,0.78f,1f);
+                        opt_eraseData.color = new Color(1f,1f,1f,1f);
+                        opt_backToMenu.color = new Color(1f,1f,1f,1f);
+                    } else if(menuPositionOptions == 1){
+                        opt_masterVolume.color = new Color(1f,1f,1f,1f);
+                        opt_eraseData.color = new Color(0f,1f,0.78f,1f);
+                        opt_backToMenu.color = new Color(1f,1f,1f,1f);
+                    } else if(menuPositionOptions == 2){
+                        opt_masterVolume.color = new Color(1f,1f,1f,1f);
+                        opt_eraseData.color = new Color(1f,1f,1f,1f);
+                        opt_backToMenu.color = new Color(0f,1f,0.78f,1f);
+                    }
+                }
+            } else {
+                if(menuPosition == 0){
+                    opt_adventureMode.color = new Color(0f,1f,0.78f,1f);
+                    opt_finalDestination.color = lockedColor;
+                    opt_breakTheTarget.color = lockedColorBTT;
+                    opt_lottery.color = new Color(1f,1f,1f,1f);
+                    opt_collection.color = new Color(1f,1f,1f,1f);
+                    opt_options.color = new Color(1f,1f,1f,1f);
+                    opt_quit.color = new Color(1f,1f,1f,1f);
+                } else if(menuPosition == 1){
+                    opt_adventureMode.color =  new Color(1f,1f,1f,1f);
+                    opt_finalDestination.color = new Color(0f,1f,0.78f,1f);
+                    opt_breakTheTarget.color = lockedColorBTT;
+                    opt_lottery.color = new Color(1f,1f,1f,1f);
+                    opt_collection.color = new Color(1f,1f,1f,1f);
+                    opt_options.color = new Color(1f,1f,1f,1f);
+                    opt_quit.color = new Color(1f,1f,1f,1f);
+                } else if(menuPosition == 2){
+                    opt_adventureMode.color =  new Color(1f,1f,1f,1f);
+                    opt_finalDestination.color = lockedColor;
+                    opt_breakTheTarget.color = new Color(0f,1f,0.78f,1f);;
+                    opt_lottery.color = new Color(1f,1f,1f,1f);
+                    opt_collection.color = new Color(1f,1f,1f,1f);
+                    opt_options.color = new Color(1f,1f,1f,1f);
+                    opt_quit.color = new Color(1f,1f,1f,1f);
+                } else if(menuPosition == 3){
+                    opt_adventureMode.color =  new Color(1f,1f,1f,1f);
+                    opt_finalDestination.color = lockedColor;
+                    opt_breakTheTarget.color = lockedColorBTT;
+                    opt_lottery.color = new Color(0f,1f,0.78f,1f);
+                    opt_collection.color = new Color(1f,1f,1f,1f);
+                    opt_options.color = new Color(1f,1f,1f,1f);
+                    opt_quit.color = new Color(1f,1f,1f,1f);
+                } else if(menuPosition == 4){
+                    opt_adventureMode.color =  new Color(1f,1f,1f,1f);
+                    opt_finalDestination.color = lockedColor;
+                    opt_breakTheTarget.color = lockedColorBTT;
+                    opt_lottery.color = new Color(1f,1f,1f,1f);
+                    opt_collection.color = new Color(0f,1f,0.78f,1f);
+                    opt_options.color = new Color(1f,1f,1f,1f);
+                    opt_quit.color = new Color(1f,1f,1f,1f);
+                } else if(menuPosition == 5){
+                    opt_adventureMode.color =  new Color(1f,1f,1f,1f);
+                    opt_finalDestination.color = lockedColor;
+                    opt_breakTheTarget.color = lockedColorBTT;
+                    opt_lottery.color = new Color(1f,1f,1f,1f);
+                    opt_collection.color = new Color(1f,1f,1f,1f);
+                    opt_options.color = new Color(0f,1f,0.78f,1f);
+                    opt_quit.color = new Color(1f,1f,1f,1f);
+                } else if(menuPosition == 6){
+                    opt_adventureMode.color =  new Color(1f,1f,1f,1f);
+                    opt_finalDestination.color = lockedColor;
+                    opt_breakTheTarget.color = lockedColorBTT;
+                    opt_lottery.color = new Color(1f,1f,1f,1f);
+                    opt_collection.color = new Color(1f,1f,1f,1f);
+                    opt_options.color = new Color(1f,1f,1f,1f);
+                    opt_quit.color = new Color(0f,1f,0.78f,1f);
+                }
             }
         }
     }
@@ -193,78 +303,98 @@ public class TitleScreen : MonoBehaviour
             if(Input.GetAxisRaw("Horizontal") < 0 && AudioListener.volume >= 0.0f){
                 AudioListener.volume -= 0.01f;
             }
-                if(AudioListener.volume > 1) { AudioListener.volume = 1; }
-                if(AudioListener.volume < 0) { AudioListener.volume = 0; }
-                volume_bar.sizeDelta = new Vector2 (AudioListener.volume * 556.38f, 43.78f);
+            if(AudioListener.volume > 1) { AudioListener.volume = 1; }
+            if(AudioListener.volume < 0) { AudioListener.volume = 0; }
+            volume_bar.sizeDelta = new Vector2 (AudioListener.volume * 556.38f, 43.78f);
         }
 
     }
 
     void MenuSelect(){
 
-        if(inCollection){
-            inOptions = false;
-            inCollection = false;
-            iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-            iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-            iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-            iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-            menuPosition = 3;
-            menuPositionOptions = 0;
-        } else if(inOptions){
-            if(menuPositionOptions == 0){
-                Debug.Log("MASTER VOLUME");
-                
-            } else if(menuPositionOptions == 1){
-                Debug.Log("ERASE DATA");
-                
-            } else if(menuPositionOptions == 2){
+        if(!blockControl){
+            moveSoundSource.clip = confirmSound;
+            moveSoundSource.Play();
+            if(inCollection){
                 inOptions = false;
                 inCollection = false;
                 iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                PlayerPrefs.SetFloat("global_volume", AudioListener.volume);
                 menuPosition = 4;
                 menuPositionOptions = 0;
-            }
-        } else {
-            if(menuPosition == 0){
-                Debug.Log("ADVENTURE MODE");
-                SceneManager.LoadScene("adventureMode");
-            } else if(menuPosition == 1){
-                Debug.Log("FINAL DESTINATION");
-                SceneManager.LoadScene("finalDestination");
-            } else if(menuPosition == 2){
-                Debug.Log("LOTTERY");
-                SceneManager.LoadScene("lottery");
-            } else if(menuPosition == 3){
-                menu_collection.SetActive(true);
-                menu_option.SetActive(false);
-                CalculateProgress();
-                inOptions = false;
-                inCollection = true;
-                iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                menuPosition = 0;
-                menuPositionOptions = 0;
-            } else if(menuPosition == 4){
-                menu_collection.SetActive(false);
-                menu_option.SetActive(true);
-                inOptions = true;
-                inCollection = false;
-                iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                menuPosition = 0;
-                menuPositionOptions = 0;
-            } else if(menuPosition == 5){
-                Debug.Log("QUIT GAME");
-                Application.Quit();
+            } else if(inOptions){
+                if(inEraseConfirm){
+                    if(menuPositionErase == 0){
+                        StartCoroutine(DeleteSaveData());
+                        
+
+                    } else if(menuPositionErase == 1){
+                        Debug.Log("GOING BACK TO OPTIONS");
+                        menu_confirm.SetActive(false);
+                        inEraseConfirm = false;
+                    }
+                } else {
+                    if(menuPositionOptions == 0){
+                        Debug.Log("MASTER VOLUME");
+
+                    } else if(menuPositionOptions == 1){
+                        menu_confirm.SetActive(true);
+                        inEraseConfirm = true;
+
+                    } else if(menuPositionOptions == 2){
+                        inOptions = false;
+                        inCollection = false;
+                        iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                        iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                        iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                        iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                        PlayerPrefs.SetFloat("global_volume", AudioListener.volume);
+                        menuPosition = 5;
+                        menuPositionOptions = 0;
+                    }
+                }
+            } else {
+                if(menuPosition == 0){
+                    Debug.Log("ADVENTURE MODE");
+                    SceneManager.LoadScene("adventureMode");
+                } else if(menuPosition == 1){
+                    Debug.Log("FINAL DESTINATION");
+                    SceneManager.LoadScene("finalDestination");
+                } else if(menuPosition == 2){
+                    Debug.Log("BREAK THE TARGET");
+                    SceneManager.LoadScene("breakTheTarget");
+                } else if(menuPosition == 3){
+                    Debug.Log("LOTTERY");
+                    SceneManager.LoadScene("lottery");
+                } else if(menuPosition == 4){
+                    menu_collection.SetActive(true);
+                    menu_option.SetActive(false);
+                    CalculateProgress();
+                    inOptions = false;
+                    inCollection = true;
+                    iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    menuPosition = 0;
+                    menuPositionOptions = 0;
+                } else if(menuPosition == 5){
+                    menu_collection.SetActive(false);
+                    menu_option.SetActive(true);
+                    inOptions = true;
+                    inCollection = false;
+                    iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    menuPosition = 0;
+                    menuPositionOptions = 0;
+                } else if(menuPosition == 6){
+                    Debug.Log("QUIT GAME");
+                    Application.Quit();
+                }
             }
         }
     }
@@ -275,10 +405,12 @@ public class TitleScreen : MonoBehaviour
         Stage 1-8 completed = 8 points
         Stage 1-8 (3 coins, 1 purle coins) = 32 points
         lottery 1-20 = 20 points
+        complete all 4 bonus stage = 4 points
         beat all bosses = 5 points
         beat final destination = 1 points;
-        total points = 66;
+        total points = 70;
         */
+        int totalPointNeeded = 70;
 
         int GlobalProgress = 0;
         int TrophyProgress = 0;
@@ -330,6 +462,18 @@ public class TitleScreen : MonoBehaviour
         if(PlayerPrefs.GetInt("stage8_wc2") == 1){ GlobalProgress++; GameObject.Find("/Canvas/Collection Menu/level8/wc2").SetActive(true); }
         if(PlayerPrefs.GetInt("stage8_wc3") == 1){ GlobalProgress++; GameObject.Find("/Canvas/Collection Menu/level8/wc3").SetActive(true); }
         if(PlayerPrefs.GetInt("stage8_pwc") == 1){ GlobalProgress++; GameObject.Find("/Canvas/Collection Menu/level8/pwc").SetActive(true); }
+
+        
+        if(PlayerPrefs.GetInt("bonusStage_1_completed") == 1){ GlobalProgress++; }
+        if(PlayerPrefs.GetInt("bonusStage_2_completed") == 1){ GlobalProgress++; }
+        if(PlayerPrefs.GetInt("bonusStage_3_completed") == 1){ GlobalProgress++; }
+        if(PlayerPrefs.GetInt("bonusStage_4_completed") == 1){ GlobalProgress++; }
+
+        if(PlayerPrefs.GetInt("breakTheTarget_1_completed") == 1){ GlobalProgress++; }
+        if(PlayerPrefs.GetInt("breakTheTarget_2_completed") == 1){ GlobalProgress++; }
+        if(PlayerPrefs.GetInt("breakTheTarget_3_completed") == 1){ GlobalProgress++; }
+        if(PlayerPrefs.GetInt("breakTheTarget_4_completed") == 1){ GlobalProgress++; }
+        if(PlayerPrefs.GetInt("breakTheTarget_5_completed") == 1){ GlobalProgress++; }
 
         if(PlayerPrefs.GetInt("boss1_completed") == 1){ GlobalProgress++; }
         if(PlayerPrefs.GetInt("boss2_completed") == 1){ GlobalProgress++; }
@@ -531,12 +675,13 @@ public class TitleScreen : MonoBehaviour
             GameObject.Find("/Canvas/Collection Menu/collected_coins/count_7").SetActive(true);
         }
 
-        float percent = Mathf.Ceil(GlobalProgress * 100 / 66);
+        float percent = Mathf.Ceil(GlobalProgress * 100 / totalPointNeeded);
 
         if(percent < 0) { percent = 0; }
         if(percent > 100) { percent = 100; }
 
     }
+
 
     IEnumerator MoveMoony(){
         while(true){
@@ -547,6 +692,215 @@ public class TitleScreen : MonoBehaviour
             moony.sprite = moony_frame_3;
             yield return new WaitForSeconds(0.17f);
         }
+    }
+
+
+    IEnumerator DeleteSaveData(){
+        blockControl = true;
+        PlayerPrefs.DeleteAll();
+        //AudioSource audio = GameObject.Find("/Main Camera").GetComponent<AudioSource>().loop = false;
+        AudioSource audio = GameObject.Find("/Main Camera").GetComponent<AudioSource>();
+        audio.loop = false;
+        audio.clip = oopelay;
+        audio.Play();
+        yield return new WaitForSeconds(1.2f);
+        SceneManager.LoadScene("TitleScreen");
+    }
+
+
+    IEnumerator SplashScreen(){
+
+        blockControl = true;
+
+        Image splashContainer = GameObject.Find("/Canvas/Preload/Image").GetComponent<Image>();
+        Image splash_T = GameObject.Find("/Canvas/Preload/T").GetComponent<Image>();
+        Image splash_A = GameObject.Find("/Canvas/Preload/A").GetComponent<Image>();
+        Image splash_S = GameObject.Find("/Canvas/Preload/S").GetComponent<Image>();
+        Image splash_H = GameObject.Find("/Canvas/Preload/H").GetComponent<Image>();
+        Image splash_I = GameObject.Find("/Canvas/Preload/I").GetComponent<Image>();
+        Image splash_R = GameObject.Find("/Canvas/Preload/R").GetComponent<Image>();
+        Image splash_O = GameObject.Find("/Canvas/Preload/O").GetComponent<Image>();
+
+        Image splashp_P = GameObject.Find("/Canvas/Preload/p_P").GetComponent<Image>();
+        Image splashp_R = GameObject.Find("/Canvas/Preload/p_R").GetComponent<Image>();
+        Image splashp_E = GameObject.Find("/Canvas/Preload/p_E").GetComponent<Image>();
+        Image splashp_S = GameObject.Find("/Canvas/Preload/p_S").GetComponent<Image>();
+        Image splashp_E2 = GameObject.Find("/Canvas/Preload/p_E2").GetComponent<Image>();
+        Image splashp_N = GameObject.Find("/Canvas/Preload/p_N").GetComponent<Image>();
+        Image splashp_T = GameObject.Find("/Canvas/Preload/p_T").GetComponent<Image>();
+        Image splashp_S2 = GameObject.Find("/Canvas/Preload/p_S2").GetComponent<Image>();
+        
+        yield return new WaitForSeconds(1f);
+
+        //T
+        float opacity = 0f;
+        iTween.MoveTo(SplashScreen_T, iTween.Hash("position", new Vector3(-1.5f,1f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splash_T.color.a < 1){
+            splash_T.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splash_T.color = new Color(1f,1f,1f,1f);
+
+        //A
+        opacity = 0f;
+        iTween.MoveTo(SplashScreen_A, iTween.Hash("position", new Vector3(-1f,1f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splash_A.color.a < 1){
+            splash_A.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splash_A.color = new Color(1f,1f,1f,1f);
+        
+        //S
+        opacity = 0f;
+        iTween.MoveTo(SplashScreen_S, iTween.Hash("position", new Vector3(-0.5f,1f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splash_S.color.a < 1){
+            splash_S.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splash_S.color = new Color(1f,1f,1f,1f);
+
+        //H
+        opacity = 0f;
+        iTween.MoveTo(SplashScreen_H, iTween.Hash("position", new Vector3(0f,1f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splash_H.color.a < 1){
+            splash_H.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splash_H.color = new Color(1f,1f,1f,1f);
+        
+        //I
+        opacity = 0f;
+        iTween.MoveTo(SplashScreen_I, iTween.Hash("position", new Vector3(0.5f,1f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splash_I.color.a < 1){
+            splash_I.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splash_I.color = new Color(1f,1f,1f,1f);
+        
+        //R
+        opacity = 0f;
+        iTween.MoveTo(SplashScreen_R, iTween.Hash("position", new Vector3(1f,1f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splash_R.color.a < 1){
+            splash_R.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splash_R.color = new Color(1f,1f,1f,1f);
+        
+        //O
+        opacity = 0f;
+        iTween.MoveTo(SplashScreen_O, iTween.Hash("position", new Vector3(1.5f,1f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splash_O.color.a < 1){
+            splash_O.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splash_O.color = new Color(1f,1f,1f,1f);
+
+        //Presents
+        opacity = 0f;
+        iTween.MoveTo(Presents_P, iTween.Hash("position", new Vector3(-1.75f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splashp_P.color.a < 1){
+            splashp_P.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splashp_P.color = new Color(1f,1f,1f,1f);
+        
+        //pResents
+        opacity = 0f;
+        iTween.MoveTo(Presents_R, iTween.Hash("position", new Vector3(-1.25f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splashp_R.color.a < 1){
+            splashp_R.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splashp_R.color = new Color(1f,1f,1f,1f);
+
+        //prEsents
+        opacity = 0f;
+        iTween.MoveTo(Presents_E, iTween.Hash("position", new Vector3(-0.75f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splashp_E.color.a < 1){
+            splashp_E.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splashp_E.color = new Color(1f,1f,1f,1f);
+
+        //preSents
+        opacity = 0f;
+        iTween.MoveTo(Presents_S, iTween.Hash("position", new Vector3(-0.25f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splashp_S.color.a < 1){
+            splashp_S.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splashp_S.color = new Color(1f,1f,1f,1f);
+
+        //presEnts
+        opacity = 0f;
+        iTween.MoveTo(Presents_E2, iTween.Hash("position", new Vector3(0.25f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splashp_E2.color.a < 1){
+            splashp_E2.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splashp_E2.color = new Color(1f,1f,1f,1f);
+
+        //preseNts
+        opacity = 0f;
+        iTween.MoveTo(Presents_N, iTween.Hash("position", new Vector3(0.75f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splashp_N.color.a < 1){
+            splashp_N.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splashp_N.color = new Color(1f,1f,1f,1f);
+
+        //presenTs
+        opacity = 0f;
+        iTween.MoveTo(Presents_T, iTween.Hash("position", new Vector3(1.25f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splashp_T.color.a < 1){
+            splashp_T.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splashp_T.color = new Color(1f,1f,1f,1f);
+
+        //presentS
+        opacity = 0f;
+        iTween.MoveTo(Presents_S2, iTween.Hash("position", new Vector3(1.75f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+        while(splashp_S2.color.a < 1){
+            splashp_S2.color = new Color(1f,1f,1f, opacity += 0.1f);
+            yield return new WaitForSeconds(0.025f);
+        }
+        splashp_S2.color = new Color(1f,1f,1f,1f);
+
+
+
+
+
+
+        
+        yield return new WaitForSeconds(3.5f);
+        opacity = 1f;
+
+        splash_T.color = new Color(0f,0f,0f,0f);
+        splash_A.color = new Color(0f,0f,0f,0f);
+        splash_S.color = new Color(0f,0f,0f,0f);
+        splash_H.color = new Color(0f,0f,0f,0f);
+        splash_I.color = new Color(0f,0f,0f,0f);
+        splash_R.color = new Color(0f,0f,0f,0f);
+        splash_O.color = new Color(0f,0f,0f,0f);
+
+        splashp_P.color = new Color(0f,0f,0f,0f);
+        splashp_R.color = new Color(0f,0f,0f,0f);
+        splashp_E.color = new Color(0f,0f,0f,0f);
+        splashp_S.color = new Color(0f,0f,0f,0f);
+        splashp_E2.color = new Color(0f,0f,0f,0f);
+        splashp_N.color = new Color(0f,0f,0f,0f);
+        splashp_T.color = new Color(0f,0f,0f,0f);
+        splashp_S2.color = new Color(0f,0f,0f,0f);
+
+        while(splashContainer.color.a > 0){
+            splashContainer.color = new Color(1f,1f,1f, opacity -= 0.05f);
+            yield return new WaitForSeconds(0.05f);
+        }
+        splashContainer.color = new Color(1f,1f,1f,0f);
+        splashScreenDone = true;
+        blockControl = false;
+        
     }
 
 }

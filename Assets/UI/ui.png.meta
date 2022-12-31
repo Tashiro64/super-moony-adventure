@@ -43,16 +43,16 @@ TextureImporter:
     second: ui_12
   - first:
       213: 6071220295474305178
-    second: ui_13
+    second: buttonMap_X
   - first:
       213: 2697481083480110284
-    second: ui_14
+    second: buttonMap_Y
   - first:
       213: 1712464482933603101
-    second: ui_15
+    second: buttonMap_A
   - first:
       213: 4874896633046561287
-    second: ui_16
+    second: buttonMap_B
   - first:
       213: -7787622976490332879
     second: ui_17
@@ -406,7 +406,31 @@ TextureImporter:
     second: ui_133
   - first:
       213: -6514909574582765751
-    second: ui_134
+    second: buttonMap_X_p
+  - first:
+      213: 9146745897196384594
+    second: buttonMap_Y_p
+  - first:
+      213: -4930499492317232377
+    second: buttonMap_A_p
+  - first:
+      213: -3596239397905902550
+    second: buttonMap_B_p
+  - first:
+      213: 4915409555762839851
+    second: ui_138
+  - first:
+      213: 3122341740164029625
+    second: ui_139
+  - first:
+      213: -4961913081836227030
+    second: ui_140
+  - first:
+      213: 3675606897646988531
+    second: ui_141
+  - first:
+      213: -6803402047747463760
+    second: ui_142
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -613,7 +637,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_13
+      name: buttonMap_X
       rect:
         serializedVersion: 2
         x: 1
@@ -634,7 +658,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_14
+      name: buttonMap_Y
       rect:
         serializedVersion: 2
         x: 14
@@ -655,7 +679,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_15
+      name: buttonMap_A
       rect:
         serializedVersion: 2
         x: 27
@@ -676,7 +700,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_16
+      name: buttonMap_B
       rect:
         serializedVersion: 2
         x: 40
@@ -700,7 +724,7 @@ TextureImporter:
       name: ui_17
       rect:
         serializedVersion: 2
-        x: 52
+        x: 161
         y: 1
         width: 16
         height: 13
@@ -721,7 +745,7 @@ TextureImporter:
       name: ui_18
       rect:
         serializedVersion: 2
-        x: 69
+        x: 178
         y: 1
         width: 17
         height: 13
@@ -742,7 +766,7 @@ TextureImporter:
       name: ui_19
       rect:
         serializedVersion: 2
-        x: 87
+        x: 196
         y: 1
         width: 16
         height: 13
@@ -763,7 +787,7 @@ TextureImporter:
       name: ui_20
       rect:
         serializedVersion: 2
-        x: 104
+        x: 213
         y: 1
         width: 17
         height: 13
@@ -3309,7 +3333,7 @@ TextureImporter:
         width: 42
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3322,11 +3346,158 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_134
+      name: buttonMap_X_p
       rect:
         serializedVersion: 2
-        x: 153
-        y: 19
+        x: 52
+        y: 1
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 947f33762446695a0800000000000000
+      internalID: -6514909574582765751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttonMap_Y_p
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 1
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 251f6259ee4cfee70800000000000000
+      internalID: 9146745897196384594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttonMap_A_p
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 1
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 703003ba5d8539bb0800000000000000
+      internalID: -4930499492317232377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttonMap_B_p
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 1
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a24dd804257971ec0800000000000000
+      internalID: -3596239397905902550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_138
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 449
+        width: 122
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b210ec0b2fa073440800000000000000
+      internalID: 4915409555762839851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_139
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 449
+        width: 58
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc1ad11549c45b20800000000000000
+      internalID: 3122341740164029625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_140
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 449
+        width: 58
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a26b9c6675eb32bb0800000000000000
+      internalID: -4961913081836227030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_141
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 439
         width: 66
         height: 10
       alignment: 0
@@ -3336,8 +3507,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 947f33762446695a0800000000000000
-      internalID: -6514909574582765751
+      spriteID: 3fc693ccff0620330800000000000000
+      internalID: 3675606897646988531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_142
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 439
+        width: 74
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b5e8df22e57591a0800000000000000
+      internalID: -6803402047747463760
       vertices: []
       indices: 
       edges: []

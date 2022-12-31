@@ -133,7 +133,7 @@ public class Config : MonoBehaviour
                 opt_backToMenu.color = new Color(0f,1f,0.78f,1f);
             }
 
-            if(Input.GetButtonDown("Jump")){
+            if(Input.GetButtonDown("Start")){
                 if(menuPausePosition == 0){
                     Time.timeScale = 1f;
                     pauseMenu.SetActive(false);

@@ -60,6 +60,17 @@ public class Progress : MonoBehaviour
             PlayerPrefs.SetInt("stage8_wc3", 0);
             PlayerPrefs.SetInt("stage8_pwc", 0);
 
+            PlayerPrefs.SetInt("bonusStage_1_completed", 0);
+            PlayerPrefs.SetInt("bonusStage_2_completed", 0);
+            PlayerPrefs.SetInt("bonusStage_3_completed", 0);
+            PlayerPrefs.SetInt("bonusStage_4_completed", 0);
+
+            PlayerPrefs.SetInt("breakTheTarget_1_completed", 0);
+            PlayerPrefs.SetInt("breakTheTarget_2_completed", 0);
+            PlayerPrefs.SetInt("breakTheTarget_3_completed", 0);
+            PlayerPrefs.SetInt("breakTheTarget_4_completed", 0);
+            PlayerPrefs.SetInt("breakTheTarget_5_completed", 0);
+
             PlayerPrefs.SetInt("boss1_completed", 0);
             PlayerPrefs.SetInt("boss2_completed", 0);
             PlayerPrefs.SetInt("boss3_completed", 0);
@@ -92,6 +103,7 @@ public class Progress : MonoBehaviour
             PlayerPrefs.SetInt("available_coins", 0);
             PlayerPrefs.SetInt("global_finalDestination_unlocked", 0);
             PlayerPrefs.SetInt("global_finalDestination_completed", 0);
+            PlayerPrefs.SetInt("global_breakTheTarget_unlocked", 0);
             PlayerPrefs.SetFloat("global_volume", 1f);
 
             PlayerPrefs.SetInt("continue", 1);
