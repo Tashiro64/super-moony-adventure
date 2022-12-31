@@ -117,7 +117,7 @@ public class TitleScreen : MonoBehaviour
 
        
 
-        if(Input.GetAxis("Vertical") == 0 && !canMove){
+        if(Input.GetAxisRaw("Vertical") == 0 && !canMove){
             canMove = true;
         }
 
@@ -240,9 +240,9 @@ public class TitleScreen : MonoBehaviour
                 Debug.Log("LOTTERY");
                 SceneManager.LoadScene("lottery");
             } else if(menuPosition == 3){
-                CalculateProgress();
                 menu_collection.SetActive(true);
                 menu_option.SetActive(false);
+                CalculateProgress();
                 inOptions = false;
                 inCollection = true;
                 iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));

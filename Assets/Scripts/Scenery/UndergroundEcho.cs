@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class UndergroundEcho : MonoBehaviour
 {
@@ -49,7 +50,7 @@ public class UndergroundEcho : MonoBehaviour
                 exposedParameter.audioMixer.SetFloat("LowPass Cutoff", echo);
             }
             if(lowpass < 22000f){
-                lowpass += 500f;
+                lowpass += 1000f;
                 if(lowpass > 22000f){ lowpass = 22000f; }
                 exposedParameter.audioMixer.SetFloat("LowPass Cutoff", lowpass);
             }

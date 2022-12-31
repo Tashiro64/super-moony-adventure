@@ -7,8 +7,8 @@ public class DeathPit : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag=="Player" && !Movement.isDead){
-            Movement.isDead = true;
+        if(other.tag=="Player" && !Config.fnc_DeadCoroutine){
+            Config.Kill = true;
         }
     }
 }
