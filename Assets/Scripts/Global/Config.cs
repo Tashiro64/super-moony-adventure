@@ -8,7 +8,7 @@ public class Config : MonoBehaviour
 {
 
     [Header("Data Configuration")]
-    public int LevelId = 1;
+    public int LevelId = 0;
     public float DeathVerticalLimit = -1000f;
     public static GameObject Character;
     public static int Health = 3;
@@ -101,7 +101,6 @@ public class Config : MonoBehaviour
         }
 
         if(fnc_isPaused){
-            Debug.Log(menuPausePosition);
             
             if(Input.GetAxisRaw("Vertical") > 0 && canMove){
                 menuPausePosition--;
@@ -133,10 +132,11 @@ public class Config : MonoBehaviour
                 opt_backToMenu.color = new Color(0f,1f,0.78f,1f);
             }
 
-            if(Input.GetButtonDown("Start")){
+            if(Input.GetButtonDown("Submit")){
                 if(menuPausePosition == 0){
                     Time.timeScale = 1f;
                     pauseMenu.SetActive(false);
+                    AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
                     fnc_isPaused = false;
                     Movement.haveControl = true;
                 } else if(menuPausePosition == 1){

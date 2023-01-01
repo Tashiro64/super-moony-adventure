@@ -8,13 +8,11 @@ public class ConfigBreakTheTarget : MonoBehaviour
 {
 
     [Header("Data Configuration")]
-    public int LevelId = 1;
+    public int LevelId = 0;
     public float DeathVerticalLimit = -1000f;
     public static GameObject Character;
     public static int TargetBroken = 0;
     public static int Timer = 400;
-
-    [Header("Sprites Configuration")]
 
     [Header("Pause Menu")]
     public GameObject pauseMenu;
@@ -59,11 +57,13 @@ public class ConfigBreakTheTarget : MonoBehaviour
             pauseMenu.SetActive(true);
             AudioListener.volume = AudioListener.volume / 2;
             menuPausePosition = 0;
+            canMove = false;
         } else if(fnc_isPaused && !fnc_DeadCoroutine && Input.GetButtonDown("Start")){
             Time.timeScale = 1f;
             pauseMenu.SetActive(false);
             AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
             fnc_isPaused = false;
+            canMove = false;
             Movement.haveControl = true;
         }
 
@@ -98,11 +98,12 @@ public class ConfigBreakTheTarget : MonoBehaviour
                 opt_levelSelect.color = new Color(1f,1f,1f,1f);
                 opt_backToMenu.color = new Color(0f,1f,0.78f,1f);
             }
-
-            if(Input.GetButtonDown("Start")){
+            
+            if(Input.GetButtonDown("Submit")){
                 if(menuPausePosition == 0){
                     Time.timeScale = 1f;
                     pauseMenu.SetActive(false);
+                    AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
                     fnc_isPaused = false;
                     Movement.haveControl = true;
                 } else if(menuPausePosition == 1){
@@ -113,6 +114,7 @@ public class ConfigBreakTheTarget : MonoBehaviour
                     SceneManager.LoadScene("TitleScreen");
                 }
             }
+            
         }
 
         //Kill Config

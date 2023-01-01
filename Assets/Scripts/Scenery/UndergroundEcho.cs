@@ -17,9 +17,10 @@ public class UndergroundEcho : MonoBehaviour
     void Start()
     {
         exposedParameter = audioMixer.FindMatchingGroups("Master")[0];
+        exposedParameter.audioMixer.SetFloat("LowPass Cutoff", 22000f);
     }
 
-    void OnTriggerStay2D(Collider2D coll)
+    void OnTriggerEnter2D(Collider2D coll)
     {
         if(coll.name == "CenterCheck"){
             makeEcho = true;

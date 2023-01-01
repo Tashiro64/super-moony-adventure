@@ -58,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +99,7 @@ AudioSource:
   m_GameObject: {fileID: 1103120799005615175}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7768827cf966b64aa7e2f28dd12e94d, type: 2}
   m_audioClip: {fileID: 8300000, guid: f42324249b440424ea90d4ed15670efd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
