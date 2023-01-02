@@ -241,7 +241,7 @@ public class ConfigBreakTheTarget : MonoBehaviour
     }
 
     IEnumerator Timer(){
-        Debug.Log()
+        Debug.Log("df");
         yield return new WaitForSeconds(0.001f);
     }
 
