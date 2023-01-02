@@ -303,7 +303,6 @@ public class Config : MonoBehaviour
         Config.fnc_DeadCoroutine = true;
         Config.Health = 0;
         Movement.haveControl = false;
-        Movement.isDead = true;
         Config.fnc_UpdateHealth = true;
         yield return new WaitForSeconds(0.3f);
     }

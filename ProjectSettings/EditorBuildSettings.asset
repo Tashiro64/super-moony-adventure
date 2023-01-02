@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestLevel.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/BreakTheTarget/Stage1.unity
+    guid: a3aa23b23107725458e80389871cdbb7
   m_configObjects: {}

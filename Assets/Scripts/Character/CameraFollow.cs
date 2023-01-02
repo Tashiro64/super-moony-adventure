@@ -20,7 +20,7 @@ public class CameraFollow : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(!Config.fnc_DeadCoroutine){
+        if(!Config.fnc_DeadCoroutine && !ConfigBreakTheTarget.fnc_RetryCoroutine){
             if(Movement.facingDirection == 1){
                 newOffset = new Vector3(offset.x, offset.y, transform.position.z);
             } else {

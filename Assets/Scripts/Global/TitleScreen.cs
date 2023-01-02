@@ -337,13 +337,11 @@ public class TitleScreen : MonoBehaviour
                         
 
                     } else if(menuPositionErase == 1){
-                        Debug.Log("GOING BACK TO OPTIONS");
                         menu_confirm.SetActive(false);
                         inEraseConfirm = false;
                     }
                 } else {
                     if(menuPositionOptions == 0){
-                        Debug.Log("MASTER VOLUME");
 
                     } else if(menuPositionOptions == 1){
                         menu_confirm.SetActive(true);
@@ -370,7 +368,7 @@ public class TitleScreen : MonoBehaviour
                     SceneManager.LoadScene("finalDestination");
                 } else if(menuPosition == 2){
                     Debug.Log("BREAK THE TARGET");
-                    SceneManager.LoadScene("breakTheTarget");
+                    SceneManager.LoadScene("Scenes/BreakTheTarget/Stage1");
                 } else if(menuPosition == 3){
                     Debug.Log("LOTTERY");
                     SceneManager.LoadScene("lottery");

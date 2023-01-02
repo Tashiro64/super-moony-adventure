@@ -32,11 +32,11 @@ public class Movement : MonoBehaviour
     public GameObject Camera;
     
     [Header("Authorization")]
+    public static bool alreadyJumpedOnce = false;
     public static bool canJump = true;
     public static bool canRoll = true;
     public static bool isJumping = false;
     public static bool isRolling = false;
-    public static bool isDead = false;
     public static bool canMove = true;
     public static bool haveControl = true;
     
@@ -59,8 +59,8 @@ public class Movement : MonoBehaviour
                 canRoll = true;
             } else if(rollingTimer >= 14){
                 canRoll = false;
-                canJump = true;
                 isRolling= false;
+                canJump = true;
                 speed = 6.9f;
                 anim.SetBool("isRolling", false);
                 rollingTimer++;
@@ -100,62 +100,44 @@ public class Movement : MonoBehaviour
 
             rb.velocity = new Vector2(horizontalInput * speed, rb.velocity.y);
 
-            if (GroundCheck.isGrounded && Input.GetButtonDown("Jump") && canJump){
-                isJumping = true;
-                jumpTime = jumpStartTime;
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-                //rb.velocity = new Vector2(rb.velocity.x, 0);
-                //rb.velocity = new Vector2(1f * jumpForce, rb.velocity.y);
-            }
-            /*
-            if (GroundCheck.isGrounded && Input.GetButtonDown("Jump") && canJump){
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-            }
-            */
-
-            /*if(Input.GetButton("Jump") && isJumping){
-                if(jumpTime > 0){
-                    rb.velocity = new Vector2(1f * jumpForce, rb.velocity.y);
-                    jumpTime -=Time.deltaTime;
-                } else {
-                    isJumping = false;
-                }
-            }
-
-            if(Input.GetButtonUp("Jump")){
-                isJumping = false;
-            }*/
-
-            if(GroundCheck.isGrounded){
-                anim.SetBool("isJumping", false);
-            } else {
-                anim.SetBool("isJumping", true);
-            }
-
             if (GroundCheck.isGrounded && Input.GetButtonDown("Roll") && !isRolling && canRoll){
                 if(horizontalInput > 0){
-                    canJump = false;
+                    //canJump = false;
                     canRoll = false;
                     isRolling = true;
                     anim.SetBool("isLookingLeft", false);
-                    anim.SetBool("isRolling", true);
                     anim.SetBool("isJumping", false);
                     anim.SetBool("isRunning", false);
+                    anim.SetBool("isRolling", true);
                     rollingTimer = 0;
                     speed = speed*2f;
                     //rb.AddForce(transform.right * rollForce, ForceMode2D.Impulse);
                 } else if(horizontalInput < 0){
-                    canJump = false;
+                    //canJump = false;
                     canRoll = false;
                     isRolling = true;
                     anim.SetBool("isLookingLeft", true);
-                    anim.SetBool("isRolling", true);
                     anim.SetBool("isJumping", false);
                     anim.SetBool("isRunning", false);
+                    anim.SetBool("isRolling", true);
                     rollingTimer = 0;
                     speed = speed*2f;
                 }
+            }
+
+            
+            if (GroundCheck.isGrounded && Input.GetButtonDown("Jump") && canJump && !alreadyJumpedOnce){
+                isJumping = true;
+                jumpTime = jumpStartTime;
+                rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+                alreadyJumpedOnce = true;
+            }
+
+            
+            if(GroundCheck.isGrounded){
+                anim.SetBool("isJumping", false);
+            } else if(!GroundCheck.isGrounded && !isRolling) {
+                anim.SetBool("isJumping", true);
             }
 
         }

@@ -9,7 +9,7 @@ public class Target : MonoBehaviour
     public bool got = false;
     
     void OnTriggerEnter2D(Collider2D other) {
-        Debug.Log("BOU");
+        
         if(other.gameObject.tag == "Player" && !got){
             Spawn.SetActive(true);
             ConfigBreakTheTarget.TargetBroken++;

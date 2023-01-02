@@ -92,7 +92,7 @@ public class ActionDisplay : MonoBehaviour
         if(chosenAction == "RB"){ Gizmos.color = Color.gray; button.GetComponent<SpriteRenderer>().sprite = Action_RB; }
         if(chosenAction == "LB"){ Gizmos.color = Color.gray; button.GetComponent<SpriteRenderer>().sprite = Action_LB; }
         
-        Gizmos.DrawCube(transform.position, new Vector3(3f,5f,3f));
+        Gizmos.DrawCube(transform.position, new Vector3(3f,2f,3f));
 
     }
 
