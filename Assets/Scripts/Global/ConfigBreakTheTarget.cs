@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using TMPro;
 
 public class ConfigBreakTheTarget : MonoBehaviour
 {
@@ -14,11 +16,15 @@ public class ConfigBreakTheTarget : MonoBehaviour
     public static int TargetBroken = 0;
     public AudioClip sfx_ready;
     public AudioClip sfx_go;
+    public AudioClip sfx_failure;
+    public AudioClip sfx_complete;
+    public AudioClip sfx_done;
     public AudioSource sfx;
 
     public int Timer_mil = 0;
     public int Timer_sec = 0;
     public int Timer_min = 0;
+    public int Timer_full = 0;
 
     public Image timer_mil2;
     public Image timer_mil1;
@@ -38,6 +44,10 @@ public class ConfigBreakTheTarget : MonoBehaviour
     public Sprite nb_8;
     public Sprite nb_9;
 
+    public Image EnterYourName;
+    public GameObject inputField;
+    public GameObject ActionList;
+
     [Header("Pause Menu")]
     public GameObject pauseMenu;
     public Image opt_continue;
@@ -53,14 +63,15 @@ public class ConfigBreakTheTarget : MonoBehaviour
     public int menuPausePosition = 0;
     public bool canMove = true;
 
-    [Header("Dynamic Prefab")]
-
     public static bool Kill = false;
     public static bool fnc_UpdateTarget = false;
     public static bool fnc_RetryCoroutine = false;
+    public bool fnc_Completed = false;
     public bool fnc_isPaused = false;
     public bool canPause = false;
     public bool runTimer = false;
+    public bool canFillName = false;
+    public bool AlreadySentToLeaderboard = false;
 
 
     void Start()
@@ -87,133 +98,156 @@ public class ConfigBreakTheTarget : MonoBehaviour
     void Update()
     {
 
-        if(canPause){
-            //Pause Config
-            if(!fnc_isPaused && !fnc_RetryCoroutine && Input.GetButtonDown("Start")){
-                Time.timeScale = 0f;
-                Movement.haveControl = false;
-                fnc_isPaused = true;
-                pauseMenu.SetActive(true);
-                AudioListener.volume = AudioListener.volume / 2;
-                menuPausePosition = 0;
-                canMove = false;
-            } else if(fnc_isPaused && !fnc_RetryCoroutine && Input.GetButtonDown("Start")){
-                Time.timeScale = 1f;
-                pauseMenu.SetActive(false);
-                AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
-                fnc_isPaused = false;
-                canMove = false;
-                StartCoroutine(DelayFrameHaveControl());
-            }
+        if(TargetBroken >= 10 && !fnc_Completed){
+            StartCoroutine(Completed());
         }
 
-        if(fnc_RetryCoroutine){
-            
-            if(Input.GetAxisRaw("Vertical") > 0 && canMove){
-                menuPausePosition--;
-                canMove = false;
-            }
-            if(Input.GetAxisRaw("Vertical") < 0 && canMove){
-                menuPausePosition++;
-                canMove = false;
-            }
+        if(!fnc_Completed){
 
-            if(menuPausePosition < 0){ menuPausePosition = 0; }
-            if(menuPausePosition > 2){ menuPausePosition = 2; }
-
-            if(Input.GetAxisRaw("Vertical") == 0 && !canMove){
-                canMove = true;
-            }
-
-            if(menuPausePosition == 0){
-                opt_dm_retry.color = new Color(0f,1f,0.78f,1f);
-                opt_dm_levelSelect.color = new Color(1f,1f,1f,1f);
-                opt_dm_backToMenu.color = new Color(1f,1f,1f,1f);
-            } else if(menuPausePosition == 1){
-                opt_dm_retry.color = new Color(1f,1f,1f,1f);
-                opt_dm_levelSelect.color = new Color(0f,1f,0.78f,1f);
-                opt_dm_backToMenu.color = new Color(1f,1f,1f,1f);
-            } else if(menuPausePosition == 2){
-                opt_dm_retry.color = new Color(1f,1f,1f,1f);
-                opt_dm_levelSelect.color = new Color(1f,1f,1f,1f);
-                opt_dm_backToMenu.color = new Color(0f,1f,0.78f,1f);
-            }
-            
-            if(Input.GetButtonDown("Submit")){
-                if(menuPausePosition == 0){
-                    SceneManager.LoadScene("Scenes/BreakTheTarget/Stage"+LevelId);
-                } else if(menuPausePosition == 1){
-                    Debug.Log("TO LEVEL SELECT");
-                } else if(menuPausePosition == 2){
-                    Time.timeScale = 1f;
-                    fnc_isPaused = false;
-                    SceneManager.LoadScene("Scenes/TitleScreen");
-                }
-            }
-        } else if(fnc_isPaused){
-            
-            if(Input.GetAxisRaw("Vertical") > 0 && canMove){
-                menuPausePosition--;
-                canMove = false;
-            }
-            if(Input.GetAxisRaw("Vertical") < 0 && canMove){
-                menuPausePosition++;
-                canMove = false;
-            }
-
-            if(menuPausePosition < 0){ menuPausePosition = 0; }
-            if(menuPausePosition > 3){ menuPausePosition = 3; }
-
-            if(Input.GetAxisRaw("Vertical") == 0 && !canMove){
-                canMove = true;
-            }
-
-            if(menuPausePosition == 0){
-                opt_continue.color = new Color(0f,1f,0.78f,1f);
-                opt_retry.color = new Color(1f,1f,1f,1f);
-                opt_levelSelect.color = new Color(1f,1f,1f,1f);
-                opt_backToMenu.color = new Color(1f,1f,1f,1f);
-            } else if(menuPausePosition == 1){
-                opt_continue.color = new Color(1f,1f,1f,1f);
-                opt_retry.color =  new Color(0f,1f,0.78f,1f);
-                opt_levelSelect.color = new Color(1f,1f,1f,1f);
-                opt_backToMenu.color = new Color(1f,1f,1f,1f);
-            } else if(menuPausePosition == 2){
-                opt_continue.color = new Color(1f,1f,1f,1f);
-                opt_retry.color = new Color(1f,1f,1f,1f);
-                opt_levelSelect.color = new Color(0f,1f,0.78f,1f);
-                opt_backToMenu.color = new Color(1f,1f,1f,1f);
-            } else if(menuPausePosition == 3){
-                opt_continue.color = new Color(1f,1f,1f,1f);
-                opt_retry.color = new Color(1f,1f,1f,1f);
-                opt_levelSelect.color = new Color(1f,1f,1f,1f);
-                opt_backToMenu.color = new Color(0f,1f,0.78f,1f);
-            }
-            
-            if(Input.GetButtonDown("Submit")){
-                if(menuPausePosition == 0){
+            if(canPause){
+                //Pause Config
+                if(!fnc_isPaused && !fnc_RetryCoroutine && Input.GetButtonDown("Start")){
+                    Time.timeScale = 0f;
+                    Movement.haveControl = false;
+                    fnc_isPaused = true;
+                    pauseMenu.SetActive(true);
+                    AudioListener.volume = AudioListener.volume / 2;
+                    menuPausePosition = 0;
+                    canMove = false;
+                } else if(fnc_isPaused && !fnc_RetryCoroutine && Input.GetButtonDown("Start")){
                     Time.timeScale = 1f;
                     pauseMenu.SetActive(false);
                     AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
                     fnc_isPaused = false;
-                    Movement.haveControl = true;
-                } else if(menuPausePosition == 1){
-                    SceneManager.LoadScene("Scenes/BreakTheTarget/Stage"+LevelId);
-                } else if(menuPausePosition == 2){
-                    Debug.Log("TO LEVEL SELECT");
-                } else if(menuPausePosition == 3){
-                    Time.timeScale = 1f;
-                    fnc_isPaused = false;
-                    SceneManager.LoadScene("Scenes/TitleScreen");
+                    canMove = false;
+                    StartCoroutine(DelayFrameHaveControl());
                 }
             }
-            
+
+            if(fnc_RetryCoroutine){
+                
+                if(Input.GetAxisRaw("Vertical") > 0 && canMove){
+                    menuPausePosition--;
+                    canMove = false;
+                }
+                if(Input.GetAxisRaw("Vertical") < 0 && canMove){
+                    menuPausePosition++;
+                    canMove = false;
+                }
+
+                if(menuPausePosition < 0){ menuPausePosition = 0; }
+                if(menuPausePosition > 2){ menuPausePosition = 2; }
+
+                if(Input.GetAxisRaw("Vertical") == 0 && !canMove){
+                    canMove = true;
+                }
+
+                if(menuPausePosition == 0){
+                    opt_dm_retry.color = new Color(0f,1f,0.78f,1f);
+                    opt_dm_levelSelect.color = new Color(1f,1f,1f,1f);
+                    opt_dm_backToMenu.color = new Color(1f,1f,1f,1f);
+                } else if(menuPausePosition == 1){
+                    opt_dm_retry.color = new Color(1f,1f,1f,1f);
+                    opt_dm_levelSelect.color = new Color(0f,1f,0.78f,1f);
+                    opt_dm_backToMenu.color = new Color(1f,1f,1f,1f);
+                } else if(menuPausePosition == 2){
+                    opt_dm_retry.color = new Color(1f,1f,1f,1f);
+                    opt_dm_levelSelect.color = new Color(1f,1f,1f,1f);
+                    opt_dm_backToMenu.color = new Color(0f,1f,0.78f,1f);
+                }
+                
+                if(Input.GetButtonDown("Submit")){
+                    if(menuPausePosition == 0){
+                        SceneManager.LoadScene("Scenes/BreakTheTarget/Stage"+LevelId);
+                    } else if(menuPausePosition == 1){
+                        Debug.Log("TO LEVEL SELECT");
+                    } else if(menuPausePosition == 2){
+                        Time.timeScale = 1f;
+                        fnc_isPaused = false;
+                        SceneManager.LoadScene("Scenes/TitleScreen");
+                    }
+                }
+            } else if(fnc_isPaused){
+                
+                if(Input.GetAxisRaw("Vertical") > 0 && canMove){
+                    menuPausePosition--;
+                    canMove = false;
+                }
+                if(Input.GetAxisRaw("Vertical") < 0 && canMove){
+                    menuPausePosition++;
+                    canMove = false;
+                }
+
+                if(menuPausePosition < 0){ menuPausePosition = 0; }
+                if(menuPausePosition > 3){ menuPausePosition = 3; }
+
+                if(Input.GetAxisRaw("Vertical") == 0 && !canMove){
+                    canMove = true;
+                }
+
+                if(menuPausePosition == 0){
+                    opt_continue.color = new Color(0f,1f,0.78f,1f);
+                    opt_retry.color = new Color(1f,1f,1f,1f);
+                    opt_levelSelect.color = new Color(1f,1f,1f,1f);
+                    opt_backToMenu.color = new Color(1f,1f,1f,1f);
+                } else if(menuPausePosition == 1){
+                    opt_continue.color = new Color(1f,1f,1f,1f);
+                    opt_retry.color =  new Color(0f,1f,0.78f,1f);
+                    opt_levelSelect.color = new Color(1f,1f,1f,1f);
+                    opt_backToMenu.color = new Color(1f,1f,1f,1f);
+                } else if(menuPausePosition == 2){
+                    opt_continue.color = new Color(1f,1f,1f,1f);
+                    opt_retry.color = new Color(1f,1f,1f,1f);
+                    opt_levelSelect.color = new Color(0f,1f,0.78f,1f);
+                    opt_backToMenu.color = new Color(1f,1f,1f,1f);
+                } else if(menuPausePosition == 3){
+                    opt_continue.color = new Color(1f,1f,1f,1f);
+                    opt_retry.color = new Color(1f,1f,1f,1f);
+                    opt_levelSelect.color = new Color(1f,1f,1f,1f);
+                    opt_backToMenu.color = new Color(0f,1f,0.78f,1f);
+                }
+                
+                if(Input.GetButtonDown("Submit")){
+                    if(menuPausePosition == 0){
+                        Time.timeScale = 1f;
+                        pauseMenu.SetActive(false);
+                        AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
+                        fnc_isPaused = false;
+                        Movement.haveControl = true;
+                    } else if(menuPausePosition == 1){
+                        SceneManager.LoadScene("Scenes/BreakTheTarget/Stage"+LevelId);
+                    } else if(menuPausePosition == 2){
+                        Debug.Log("TO LEVEL SELECT");
+                    } else if(menuPausePosition == 3){
+                        Time.timeScale = 1f;
+                        fnc_isPaused = false;
+                        SceneManager.LoadScene("Scenes/TitleScreen");
+                    }
+                }
+                
+            }
+
+            //Kill Config
+            if(!fnc_RetryCoroutine && ConfigBreakTheTarget.Kill){
+                StartCoroutine(CallDeath());
+            }
         }
 
-        //Kill Config
-        if(!fnc_RetryCoroutine && ConfigBreakTheTarget.Kill){
-            StartCoroutine(CallDeath());
+        //when it's time to fill out your name
+        if(canFillName){
+            if(Input.GetButtonDown("Y")){
+                SceneManager.LoadScene("Scenes/BreakTheTarget/Stage"+LevelId);
+            }
+            if(Input.GetButtonDown("Cancel")){
+                Debug.Log("LEVEL SELECT");
+            }
+            if(Input.GetButtonDown("Submit") && !AlreadySentToLeaderboard && inputField.GetComponent<TMP_InputField>().text != ""){
+                StartCoroutine(Upload());
+                AlreadySentToLeaderboard = true;
+                Debug.Log("SENT TO LEADERBOARD");
+            }
         }
+
     }
 
 
@@ -227,6 +261,29 @@ public class ConfigBreakTheTarget : MonoBehaviour
 
     }
 
+    IEnumerator Upload(){
+
+        string nickname = inputField.GetComponent<TMP_InputField>().text;
+        string Timer_mil_txt = Timer_mil.ToString("00");
+        string Timer_sec_txt = Timer_sec.ToString("00");
+        string Timer_min_txt = Timer_min.ToString("00");
+
+        string Timer_text = Timer_min_txt + ":" + Timer_sec_txt + ":" + Timer_mil_txt;
+
+        string url = "https://twitch.tashiroworld.com/superMoonyAdventure_Leaderboard.php?stage="+LevelId+"&post=1&username=" + nickname + "&score=" + Timer_full + "&scoreText="+ Timer_text;
+        
+        using (UnityWebRequest www = UnityWebRequest.Get(url)){
+            yield return www.SendWebRequest();
+
+            GameObject.Find("/Canvas/Action/Action_submit").SetActive(false);
+            GameObject.Find("/Canvas/EnterYourName").SetActive(false);
+            GameObject.Find("/Canvas/InputField").SetActive(false);
+            sfx.clip = sfx_done;
+            sfx.Play();
+        }
+
+    }
+
     IEnumerator DelayFrameHaveControl(){
         yield return new WaitForSeconds(0.1f);
         Movement.haveControl = true;
@@ -234,6 +291,8 @@ public class ConfigBreakTheTarget : MonoBehaviour
     
     IEnumerator CallDeath(){
         fnc_RetryCoroutine = true;
+        sfx.clip = sfx_failure;
+        sfx.Play();
         AudioListener.volume = AudioListener.volume / 2;
         Kill = false;
         deadMenu.SetActive(true);
@@ -273,7 +332,6 @@ public class ConfigBreakTheTarget : MonoBehaviour
         
         ProgressBar.sizeDelta = new Vector2 (0f, 13f);
         Destroy(Ready);
-        Destroy(ReadyWall);
 
         Movement.haveControl = true;
     }
@@ -287,7 +345,8 @@ public class ConfigBreakTheTarget : MonoBehaviour
                 Timer_sec = 00;
                 Timer_min = 60;
             } else {
-                Timer_mil ++;
+                Timer_mil++;
+                Timer_full++;
 
                 if(Timer_mil >= 100){
                     Timer_sec++;
@@ -356,5 +415,49 @@ public class ConfigBreakTheTarget : MonoBehaviour
 
     }
 
+    IEnumerator Completed(){
+        
+        fnc_Completed = true;
+        runTimer = false;
+        Movement.haveControl = false;
+        GameObject.Find("/Character/Sprite").GetComponent<Animator>().enabled = false;
+        
+        sfx.clip = sfx_complete;
+        sfx.Play();
+
+        GameObject.Find("/Character/Sprite").GetComponent<Rigidbody2D>().isKinematic = true;
+        GameObject.Find("/Character/Sprite").GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        GameObject.Find("/Canvas/Complete").GetComponent<Image>().color = new Color(1f,1f,1f,1f);
+        
+        Image ReadyWall = GameObject.Find("/Canvas/ReadyWall").GetComponent<Image>();
+
+        float opacity = 0f;
+        while(ReadyWall.color.a < 0.85f){
+            opacity += 0.025f;
+            ReadyWall.color = new Color(0f,0f,0f,opacity);
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        RectTransform TimerObj = GameObject.Find("/Canvas/Timer").GetComponent<RectTransform>();
+        TimerObj.anchorMin = new Vector2(0.5f, 0.5f);
+        TimerObj.anchorMax = new Vector2(0.5f, 0.5f);
+        TimerObj.anchoredPosition = new Vector2(544f, 347f);
+
+        while(TimerObj.anchoredPosition.x > 0){
+            TimerObj.anchoredPosition = new Vector2(TimerObj.anchoredPosition.x - 2f, TimerObj.anchoredPosition.y - 0.9f);
+            TimerObj.localScale = new Vector2(TimerObj.localScale.x + 0.003f, TimerObj.localScale.y + 0.003f);
+            yield return new WaitForSeconds(0.001f);
+        }
+
+        EnterYourName.gameObject.SetActive(true);
+        ActionList.SetActive(true);
+        inputField.SetActive(true);
+        TMP_InputField input = inputField.GetComponent<TMP_InputField>();
+        input.Select();
+        input.ActivateInputField();
+
+        canFillName = true;
+
+    }
 
 }

@@ -14,7 +14,7 @@ public class Movement : MonoBehaviour
     public float jumpStartTime;
     private float jumpTime;
     public float rollForce = 22f;
-    public static int rollingTimer = 14;
+    public static int rollingTimer = 45;
 
     [Header("Directional configuration")]
     public float horizontalInput;
