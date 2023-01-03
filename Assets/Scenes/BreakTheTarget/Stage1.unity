@@ -9228,10 +9228,12 @@ MonoBehaviour:
   sfx_go: {fileID: 8300000, guid: 75b0cbd87c57d654eaa327428ec4d4db, type: 3}
   sfx_failure: {fileID: 8300000, guid: 76a7d408e387bb8409c22abe4da2fcfd, type: 3}
   sfx_complete: {fileID: 8300000, guid: cffd3b8597cd84c4ba725128d1bc831f, type: 3}
+  sfx_done: {fileID: 8300000, guid: e39ca7d7a5d30da4ea679b6406e536c4, type: 3}
   sfx: {fileID: 2011454917}
   Timer_mil: 0
   Timer_sec: 0
   Timer_min: 0
+  Timer_full: 0
   timer_mil2: {fileID: 1011714482}
   timer_mil1: {fileID: 873447407}
   timer_sec2: {fileID: 1730446821}
@@ -9267,6 +9269,7 @@ MonoBehaviour:
   canPause: 0
   runTimer: 0
   canFillName: 0
+  AlreadySentToLeaderboard: 0
 --- !u!4 &2011454916
 Transform:
   m_ObjectHideFlags: 0
