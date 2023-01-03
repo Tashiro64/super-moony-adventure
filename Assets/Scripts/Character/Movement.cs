@@ -20,6 +20,7 @@ public class Movement : MonoBehaviour
     public float horizontalInput;
     public float verticalInput;
     public static float facingDirection = 1;
+    public bool lockDirection = false;
 
     [Header("GameObject Set")]
     public Rigidbody2D rb;
@@ -74,6 +75,12 @@ public class Movement : MonoBehaviour
     void Update()
     {
 
+        if(Input.GetAxis("FixDirection") > 0){
+            lockDirection = true;
+        } else {
+            lockDirection = false;
+        }
+
         //work background
         StageBackground.transform.position = new Vector3((Camera.transform.position.x /1.1f)+30f, (Camera.transform.position.y / 1.3f)+2f, 14.3f);
 
@@ -87,12 +94,16 @@ public class Movement : MonoBehaviour
 
             Vector2 direction = new Vector2(horizontalInput, verticalInput);
             if(horizontalInput > 0){
-                facingDirection = 1;
-                sr.flipX = false;
+                if(!lockDirection){
+                    facingDirection = 1;
+                    sr.flipX = false;
+                }
                 anim.SetBool("isRunning", true);
             } else if(horizontalInput < 0){
-                facingDirection = -1;
-                sr.flipX = true;
+                if(!lockDirection){
+                    facingDirection = -1;
+                    sr.flipX = true;
+                }
                 anim.SetBool("isRunning", true);
             } else {
                 anim.SetBool("isRunning", false);
