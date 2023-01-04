@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class TitleScreen : MonoBehaviour
 {
 
+    public static bool loadInBreakTheTarget = false;
+
     public Image opt_adventureMode;
     public Image opt_finalDestination;
     public Image opt_breakTheTarget;
@@ -22,9 +24,16 @@ public class TitleScreen : MonoBehaviour
     public Image opt_eraseData;
     public Image opt_backToMenu;
 
+    public Image opt_stage1;
+    public Image opt_stage2;
+    public Image opt_stage3;
+    public Image opt_stage4;
+    public Image opt_stage5;
+
     public GameObject menu_main;
     public GameObject menu_option;
     public GameObject menu_collection;
+    public GameObject menu_breakTheTargets;
     public GameObject menu_background;
     public GameObject menu_confirm;
     
@@ -48,13 +57,15 @@ public class TitleScreen : MonoBehaviour
 
     public bool inOptions = false;
     public bool inCollection = false;
+    public bool inBreakTheTargets = false;
     public bool inEraseConfirm = false;
     public bool blockControl = false;
-    public bool splashScreenDone = false;
+    public static bool splashScreenDone = false;
 
     public int menuPosition = 0;
     public int menuPositionOptions = 0;
     public int menuPositionErase = 1;
+    public int menuPositionBreakTheTargets = 0;
 
     public Sprite number_0;
     public Sprite number_1;
@@ -85,6 +96,21 @@ public class TitleScreen : MonoBehaviour
     public GameObject Presents_S2;
 
     public AudioClip oopelay;
+
+    void Awake(){
+
+        if(loadInBreakTheTarget){
+            menu_breakTheTargets.SetActive(true);
+            iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 0f, "easetype", iTween.EaseType.easeOutBack));
+            iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 0f, "easetype", iTween.EaseType.easeOutBack));
+            StartCoroutine(Fade());
+            inBreakTheTargets = true;
+            menuPositionBreakTheTargets = 0;
+            loadInBreakTheTarget = false;
+        }
+        loadInBreakTheTarget = false;
+
+    }
 
     void Start()
     {
@@ -126,9 +152,47 @@ public class TitleScreen : MonoBehaviour
             if(Input.GetButtonDown("Submit")){
                 MenuSelect();
             }
+            if(Input.GetButtonDown("Cancel")){
+
+                if(inOptions){ menuPosition = 5; }
+                if(inCollection){ menuPosition = 4; }
+                if(inBreakTheTargets){ menuPosition = 2; }
+
+                inOptions = false;
+                inCollection = false;
+                inBreakTheTargets = false;
+                iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                PlayerPrefs.SetFloat("global_volume", AudioListener.volume);
+                menuPositionOptions = 0;
+                menuPositionBreakTheTargets = 0;
+            }
 
             if(inCollection){
 
+            } else if(inBreakTheTargets){
+                if(Input.GetAxisRaw("Vertical") > 0 && canMove){
+                    menuPositionBreakTheTargets--;
+                    moveSoundSource.clip = moveSound;
+                    moveSoundSource.Play();
+                    canMove = false;
+                }
+                if(Input.GetAxisRaw("Vertical") < 0 && canMove){
+                    menuPositionBreakTheTargets++;
+                    moveSoundSource.clip = moveSound;
+                    moveSoundSource.Play();
+                    canMove = false;
+                }
+
+                if(menuPositionBreakTheTargets < 0){
+                    menuPositionBreakTheTargets = 0;
+                }
+                if(menuPositionBreakTheTargets > 4){
+                    menuPositionBreakTheTargets = 4;
+                }
             } else if(inOptions){
                 if(inEraseConfirm){
                     if(Input.GetAxisRaw("Vertical") > 0 && canMove){
@@ -214,6 +278,38 @@ public class TitleScreen : MonoBehaviour
 
             if(inCollection){
 
+            } else if(inBreakTheTargets){
+                if(menuPositionBreakTheTargets == 0){
+                    opt_stage1.color = new Color(0f,1f,0.78f,1f);
+                    opt_stage2.color = new Color(1f,1f,1f,1f);
+                    opt_stage3.color = new Color(1f,1f,1f,1f);
+                    opt_stage4.color = new Color(1f,1f,1f,1f);
+                    opt_stage5.color = new Color(1f,1f,1f,1f);
+                } else if(menuPositionBreakTheTargets == 1){
+                    opt_stage1.color = new Color(1f,1f,1f,1f);
+                    opt_stage2.color = new Color(0f,1f,0.78f,1f);
+                    opt_stage3.color = new Color(1f,1f,1f,1f);
+                    opt_stage4.color = new Color(1f,1f,1f,1f);
+                    opt_stage5.color = new Color(1f,1f,1f,1f);
+                } else if(menuPositionBreakTheTargets == 2){
+                    opt_stage1.color = new Color(1f,1f,1f,1f);
+                    opt_stage2.color = new Color(1f,1f,1f,1f);
+                    opt_stage3.color = new Color(0f,1f,0.78f,1f);
+                    opt_stage4.color = new Color(1f,1f,1f,1f);
+                    opt_stage5.color = new Color(1f,1f,1f,1f);
+                } else if(menuPositionBreakTheTargets == 3){
+                    opt_stage1.color = new Color(1f,1f,1f,1f);
+                    opt_stage2.color = new Color(1f,1f,1f,1f);
+                    opt_stage3.color = new Color(1f,1f,1f,1f);
+                    opt_stage4.color = new Color(0f,1f,0.78f,1f);
+                    opt_stage5.color = new Color(1f,1f,1f,1f);
+                } else if(menuPositionBreakTheTargets == 4){
+                    opt_stage1.color = new Color(1f,1f,1f,1f);
+                    opt_stage2.color = new Color(1f,1f,1f,1f);
+                    opt_stage3.color = new Color(1f,1f,1f,1f);
+                    opt_stage4.color = new Color(1f,1f,1f,1f);
+                    opt_stage5.color = new Color(0f,1f,0.78f,1f);
+                }
             } else if(inOptions){
                 if(inEraseConfirm){
                     if(menuPositionErase == 0){
@@ -324,12 +420,16 @@ public class TitleScreen : MonoBehaviour
             if(inCollection){
                 inOptions = false;
                 inCollection = false;
+                inBreakTheTargets = false;
                 iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                 menuPosition = 4;
                 menuPositionOptions = 0;
+            } else if(inBreakTheTargets){
+                SceneManager.LoadScene("Scenes/BreakTheTarget/Stage"+(menuPositionBreakTheTargets+1));
             } else if(inOptions){
                 if(inEraseConfirm){
                     if(menuPositionErase == 0){
@@ -350,6 +450,7 @@ public class TitleScreen : MonoBehaviour
                     } else if(menuPositionOptions == 2){
                         inOptions = false;
                         inCollection = false;
+                        inBreakTheTargets = false;
                         iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                         iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                         iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
@@ -361,43 +462,75 @@ public class TitleScreen : MonoBehaviour
                 }
             } else {
                 if(menuPosition == 0){
+
                     Debug.Log("ADVENTURE MODE");
                     SceneManager.LoadScene("adventureMode");
+
                 } else if(menuPosition == 1){
+
                     Debug.Log("FINAL DESTINATION");
                     SceneManager.LoadScene("finalDestination");
+
                 } else if(menuPosition == 2){
-                    Debug.Log("BREAK THE TARGET");
-                    SceneManager.LoadScene("Scenes/BreakTheTarget/Stage1");
+
+                    menu_collection.SetActive(false);
+                    menu_option.SetActive(false);
+                    menu_breakTheTargets.SetActive(true);
+                    inOptions = false;
+                    inCollection = false;
+                    inBreakTheTargets = true;
+                    iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    menuPosition = 2;
+                    menuPositionOptions = 0;
+                    menuPositionBreakTheTargets = 0;
+
                 } else if(menuPosition == 3){
+
                     Debug.Log("LOTTERY");
                     SceneManager.LoadScene("lottery");
+
                 } else if(menuPosition == 4){
+
                     menu_collection.SetActive(true);
                     menu_option.SetActive(false);
+                    menu_breakTheTargets.SetActive(false);
                     CalculateProgress();
                     inOptions = false;
                     inCollection = true;
+                    inBreakTheTargets = false;
                     iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                     iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                     iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                     iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                     menuPosition = 0;
                     menuPositionOptions = 0;
+
                 } else if(menuPosition == 5){
+
                     menu_collection.SetActive(false);
                     menu_option.SetActive(true);
+                    menu_breakTheTargets.SetActive(false);
                     inOptions = true;
                     inCollection = false;
+                    inBreakTheTargets = false;
                     iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(-0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                     iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                     iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                     iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
                     menuPosition = 0;
                     menuPositionOptions = 0;
+
                 } else if(menuPosition == 6){
+
                     Debug.Log("QUIT GAME");
                     Application.Quit();
+
                 }
             }
         }
@@ -931,11 +1064,6 @@ public class TitleScreen : MonoBehaviour
         splashp_S2.color = new Color(1f,1f,1f,1f);
 
 
-
-
-
-
-        
         yield return new WaitForSeconds(3.5f);
         opacity = 1f;
 
@@ -956,14 +1084,25 @@ public class TitleScreen : MonoBehaviour
         splashp_T.color = new Color(0f,0f,0f,0f);
         splashp_S2.color = new Color(0f,0f,0f,0f);
 
+        blockControl = false;
+        splashScreenDone = true;
         while(splashContainer.color.a > 0){
             splashContainer.color = new Color(1f,1f,1f, opacity -= 0.05f);
             yield return new WaitForSeconds(0.05f);
         }
         splashContainer.color = new Color(1f,1f,1f,0f);
-        splashScreenDone = true;
-        blockControl = false;
         
+    }
+
+    IEnumerator Fade(){
+        Image black = GameObject.Find("/Canvas/Preload/Image").GetComponent<Image>();
+        GameObject.Find("/Main Camera").GetComponent<MusicLoop>().enabled = false;
+        float opacity = 1;
+        while(black.color.a > 0){
+            opacity -= 0.05f;
+            black.color = new Color(0f,0f,0f,opacity);
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
 }

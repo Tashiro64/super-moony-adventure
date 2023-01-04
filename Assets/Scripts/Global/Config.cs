@@ -140,7 +140,7 @@ public class Config : MonoBehaviour
                     fnc_isPaused = false;
                     Movement.haveControl = true;
                 } else if(menuPausePosition == 1){
-                    Debug.Log("TO LEVEL SELECT");
+                    Debug.Log("TO ADVENTURE LEVEL SELECT");
                 } else if(menuPausePosition == 2){
                     Time.timeScale = 1f;
                     fnc_isPaused = false;

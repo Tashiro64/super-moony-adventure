@@ -160,7 +160,8 @@ public class ConfigBreakTheTarget : MonoBehaviour
                     if(menuPausePosition == 0){
                         SceneManager.LoadScene("Scenes/BreakTheTarget/Stage"+LevelId);
                     } else if(menuPausePosition == 1){
-                        Debug.Log("TO LEVEL SELECT");
+                        TitleScreen.loadInBreakTheTarget = true;
+                        SceneManager.LoadScene("Scenes/TitleScreen");
                     } else if(menuPausePosition == 2){
                         Time.timeScale = 1f;
                         fnc_isPaused = false;
@@ -217,10 +218,15 @@ public class ConfigBreakTheTarget : MonoBehaviour
                     } else if(menuPausePosition == 1){
                         SceneManager.LoadScene("Scenes/BreakTheTarget/Stage"+LevelId);
                     } else if(menuPausePosition == 2){
-                        Debug.Log("TO LEVEL SELECT");
+                        TitleScreen.loadInBreakTheTarget = true;
+                        Time.timeScale = 1f;
+                        fnc_isPaused = false;
+                        AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
+                        SceneManager.LoadScene("Scenes/TitleScreen");
                     } else if(menuPausePosition == 3){
                         Time.timeScale = 1f;
                         fnc_isPaused = false;
+                        AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
                         SceneManager.LoadScene("Scenes/TitleScreen");
                     }
                 }
@@ -239,7 +245,8 @@ public class ConfigBreakTheTarget : MonoBehaviour
                 SceneManager.LoadScene("Scenes/BreakTheTarget/Stage"+LevelId);
             }
             if(Input.GetButtonDown("Cancel")){
-                Debug.Log("LEVEL SELECT");
+                TitleScreen.loadInBreakTheTarget = true;
+                SceneManager.LoadScene("Scenes/TitleScreen");
             }
             if(Input.GetButtonDown("Submit") && !AlreadySentToLeaderboard && inputField.GetComponent<TMP_InputField>().text != ""){
                 StartCoroutine(Upload());
