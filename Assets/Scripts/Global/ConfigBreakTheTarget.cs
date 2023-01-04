@@ -73,6 +73,8 @@ public class ConfigBreakTheTarget : MonoBehaviour
     public bool canFillName = false;
     public bool AlreadySentToLeaderboard = false;
 
+    public static string sessionName = "";
+
 
     void Start()
     {
@@ -285,6 +287,7 @@ public class ConfigBreakTheTarget : MonoBehaviour
             GameObject.Find("/Canvas/Action/Action_submit").SetActive(false);
             GameObject.Find("/Canvas/EnterYourName").SetActive(false);
             GameObject.Find("/Canvas/InputField").SetActive(false);
+            sessionName = nickname;
             sfx.clip = sfx_done;
             sfx.Play();
         }
@@ -460,8 +463,10 @@ public class ConfigBreakTheTarget : MonoBehaviour
         ActionList.SetActive(true);
         inputField.SetActive(true);
         TMP_InputField input = inputField.GetComponent<TMP_InputField>();
+        input.text = sessionName;
         input.Select();
         input.ActivateInputField();
+        input.caretPosition = input.text.Length;
 
         canFillName = true;
 

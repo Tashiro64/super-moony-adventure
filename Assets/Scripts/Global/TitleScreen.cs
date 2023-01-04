@@ -65,7 +65,7 @@ public class TitleScreen : MonoBehaviour
     public int menuPosition = 0;
     public int menuPositionOptions = 0;
     public int menuPositionErase = 1;
-    public int menuPositionBreakTheTargets = 0;
+    public static int menuPositionBreakTheTargets = 0;
 
     public Sprite number_0;
     public Sprite number_1;
@@ -105,7 +105,7 @@ public class TitleScreen : MonoBehaviour
             iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 0f, "easetype", iTween.EaseType.easeOutBack));
             StartCoroutine(Fade());
             inBreakTheTargets = true;
-            menuPositionBreakTheTargets = 0;
+            //menuPositionBreakTheTargets = 0;
             loadInBreakTheTarget = false;
         }
         loadInBreakTheTarget = false;
