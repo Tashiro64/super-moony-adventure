@@ -159,16 +159,25 @@ public class Movement : MonoBehaviour
     void PreventExtreme(){
 
         if(!isRolling && rb.velocity.x > 6.7f) {
+            //if not rolling, prevent player from going to fast on Y
             rb.velocity = new Vector2(6.7f, rb.velocity.y);
         }
         if(!isRolling && rb.velocity.x < -6.7f) {
+            //if not rolling, prevent player from going to fast on -Y
             rb.velocity = new Vector2(-6.7f, rb.velocity.y);
         }
         if(rb.velocity.y > 30f) {
+            //if not rolling, prevent player from going to fast on X
             rb.velocity = new Vector2(rb.velocity.x, 30f);
         }
         if(rb.velocity.y < -30f) {
+            //if not rolling, prevent player from going to fast on -X
             rb.velocity = new Vector2(rb.velocity.x, -30f);
+        }
+        if(rb.gameObject.transform.position.y < -1000){
+            //if player is falling too much in world position, prevent future out of bounds values after hours by removing movement.
+            rb.gameObject.GetComponent<Rigidbody2D>().isKinematic = true;
+            rb.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         }
     }
 

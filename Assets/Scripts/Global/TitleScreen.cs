@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
+using TMPro;
 
 public class TitleScreen : MonoBehaviour
 {
@@ -36,6 +38,7 @@ public class TitleScreen : MonoBehaviour
     public GameObject menu_breakTheTargets;
     public GameObject menu_background;
     public GameObject menu_confirm;
+    public GameObject menu_leaderboard;
     
     public RectTransform volume_bar;
 
@@ -59,6 +62,7 @@ public class TitleScreen : MonoBehaviour
     public bool inCollection = false;
     public bool inBreakTheTargets = false;
     public bool inEraseConfirm = false;
+    public bool inLeaderboard = false;
     public bool blockControl = false;
     public static bool splashScreenDone = false;
 
@@ -96,7 +100,7 @@ public class TitleScreen : MonoBehaviour
     public GameObject Presents_S2;
 
     public AudioClip oopelay;
-
+    
     void Awake(){
 
         if(loadInBreakTheTarget){
@@ -109,6 +113,7 @@ public class TitleScreen : MonoBehaviour
             loadInBreakTheTarget = false;
         }
         loadInBreakTheTarget = false;
+        
 
     }
 
@@ -152,23 +157,31 @@ public class TitleScreen : MonoBehaviour
             if(Input.GetButtonDown("Submit")){
                 MenuSelect();
             }
+            if(inBreakTheTargets && Input.GetButtonDown("Y")){
+                inLeaderboard = true;
+                StartCoroutine(BreakTheTargetLeaderBoard());
+            }
             if(Input.GetButtonDown("Cancel")){
+                if(inLeaderboard){
+                    menu_leaderboard.SetActive(false);
+                    inLeaderboard = false;
+                } else {
+                    if(inOptions){ menuPosition = 5; }
+                    if(inCollection){ menuPosition = 4; }
+                    if(inBreakTheTargets){ menuPosition = 2; }
 
-                if(inOptions){ menuPosition = 5; }
-                if(inCollection){ menuPosition = 4; }
-                if(inBreakTheTargets){ menuPosition = 2; }
-
-                inOptions = false;
-                inCollection = false;
-                inBreakTheTargets = false;
-                iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
-                PlayerPrefs.SetFloat("global_volume", AudioListener.volume);
-                menuPositionOptions = 0;
-                menuPositionBreakTheTargets = 0;
+                    inOptions = false;
+                    inCollection = false;
+                    inBreakTheTargets = false;
+                    iTween.MoveTo(menu_background, iTween.Hash("position", new Vector3(0.86f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_collection, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_option, iTween.Hash("position", new Vector3(20f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 1.3f, "easetype", iTween.EaseType.easeOutBack));
+                    PlayerPrefs.SetFloat("global_volume", AudioListener.volume);
+                    menuPositionOptions = 0;
+                    menuPositionBreakTheTargets = 0;
+                }
             }
 
             if(inCollection){
@@ -527,10 +540,7 @@ public class TitleScreen : MonoBehaviour
                     menuPositionOptions = 0;
 
                 } else if(menuPosition == 6){
-
-                    Debug.Log("QUIT GAME");
                     Application.Quit();
-
                 }
             }
         }
@@ -1103,6 +1113,64 @@ public class TitleScreen : MonoBehaviour
             black.color = new Color(0f,0f,0f,opacity);
             yield return new WaitForSeconds(0.01f);
         }
+    }
+
+    IEnumerator BreakTheTargetLeaderBoard(){
+
+        
+        int LoadStageID = menuPositionBreakTheTargets+1;
+        string url = "https://twitch.tashiroworld.com/superMoonyAdventure_Leaderboard.php?obtain=1&stage="+LoadStageID;
+        
+        UnityWebRequest www = UnityWebRequest.Get(url);
+
+        yield return www.SendWebRequest();
+
+        string data = www.downloadHandler.text;
+
+        string[] strArray = data.Split('\\');
+
+        int pos = 0;
+
+        string nickname_text = "";
+        string score_text = "";
+        string stage_text = "Leaderboard - Stage " + LoadStageID;
+
+        for (int i = 0; i < strArray.Length; i++) {
+            
+            string player = strArray[i];
+
+            if(strArray[i] != ""){
+                pos++;
+
+                string[] playerinfo = player.Split('|');
+
+                /*
+                GameObject.Find("/Canvas/Break The Targets Menu/BackgroundLeaderboard/lb_nickname").GetComponent<TextMeshPro>().text = 
+                    GameObject.Find("/Canvas/Break The Targets Menu/BackgroundLeaderboard/lb_nickname").GetComponent<TextMeshPro>().text + 
+                    playerinfo[1] + 
+                    (pos != 10 ? "\n" : "");
+
+                GameObject.Find("/Canvas/Break The Targets Menu/BackgroundLeaderboard/lb_score").GetComponent<TextMeshPro>().text =
+                    GameObject.Find("/Canvas/Break The Targets Menu/BackgroundLeaderboard/lb_score").GetComponent<TextMeshPro>().text + 
+                    playerinfo[2] + 
+                    (pos != 10 ? "\n" : "");
+                */
+
+                nickname_text = nickname_text + playerinfo[1] + (pos != 10 ? "\n" : "");
+                score_text = score_text + playerinfo[2] + (pos != 10 ? "\n" : "");
+
+            }
+
+        }
+
+        menu_leaderboard.SetActive(true);
+        
+        GameObject.Find("/Canvas/Break The Targets Menu/BackgroundLeaderboard/lb_nickname").GetComponent<TextMeshProUGUI>().text = nickname_text;
+        GameObject.Find("/Canvas/Break The Targets Menu/BackgroundLeaderboard/lb_score").GetComponent<TextMeshProUGUI>().text = score_text;
+        GameObject.Find("/Canvas/Break The Targets Menu/BackgroundLeaderboard/lb_stage").GetComponent<TextMeshProUGUI>().text = stage_text;
+
+        yield return new WaitForSeconds(1f);
+
     }
 
 }

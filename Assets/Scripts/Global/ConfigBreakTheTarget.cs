@@ -253,7 +253,6 @@ public class ConfigBreakTheTarget : MonoBehaviour
             if(Input.GetButtonDown("Submit") && !AlreadySentToLeaderboard && inputField.GetComponent<TMP_InputField>().text != ""){
                 StartCoroutine(Upload());
                 AlreadySentToLeaderboard = true;
-                Debug.Log("SENT TO LEADERBOARD");
             }
         }
 
