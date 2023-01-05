@@ -218,6 +218,7 @@ MonoBehaviour:
   rollForce: 22
   horizontalInput: 0
   verticalInput: 0
+  lockDirection: 0
   rb: {fileID: 0}
   sr: {fileID: 0}
   anim: {fileID: 0}
@@ -261,7 +262,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.08350468}
+  m_Offset: {x: 0, y: -0.09918821}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -272,7 +273,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.257803}
+  m_Size: {x: 0.5, y: 1.2264359}
   m_EdgeRadius: 0
 --- !u!95 &6809612648501426755
 Animator:

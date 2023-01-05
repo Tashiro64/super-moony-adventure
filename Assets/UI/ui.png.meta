@@ -497,6 +497,15 @@ TextureImporter:
   - first:
       213: -1232131592013335895
     second: ui_164
+  - first:
+      213: -8886258912232771739
+    second: trophy_gold
+  - first:
+      213: 977562025212960580
+    second: trophy_silver
+  - first:
+      213: -2509369268784859294
+    second: trophy_bronze
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -3945,7 +3954,7 @@ TextureImporter:
         width: 54
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3966,7 +3975,7 @@ TextureImporter:
         width: 54
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -3987,7 +3996,7 @@ TextureImporter:
         width: 54
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4008,7 +4017,7 @@ TextureImporter:
         width: 54
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4029,7 +4038,7 @@ TextureImporter:
         width: 54
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4050,7 +4059,7 @@ TextureImporter:
         width: 54
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -4058,6 +4067,69 @@ TextureImporter:
       bones: []
       spriteID: 9a2328d58d696eee0800000000000000
       internalID: -1232131592013335895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trophy_gold
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 34
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 56f673ac99aada480800000000000000
+      internalID: -8886258912232771739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trophy_silver
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 34
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44fdaba8b7ff09d00800000000000000
+      internalID: 977562025212960580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: trophy_bronze
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 34
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 267fbcbf1fdec2dd0800000000000000
+      internalID: -2509369268784859294
       vertices: []
       indices: 
       edges: []
