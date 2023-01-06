@@ -5,6 +5,78 @@ TextureImporter:
   - first:
       213: 6158802113039044628
     second: horizontalPlatform
+  - first:
+      213: -5693590246162419906
+    second: convoyer_left_1
+  - first:
+      213: 5113305516112643439
+    second: convoyer_left_2
+  - first:
+      213: -8689035635190686027
+    second: convoyer_left_3
+  - first:
+      213: -7340963149319210717
+    second: convoyer_left_4
+  - first:
+      213: -2011216184659823745
+    second: convoyer_left_5
+  - first:
+      213: 5618000101936168721
+    second: convoyer_left_6
+  - first:
+      213: -5369452329608476640
+    second: convoyer_left_7
+  - first:
+      213: -6305492505211837727
+    second: convoyer_left_8
+  - first:
+      213: 6539746089192941403
+    second: convoyer_center_1
+  - first:
+      213: 3786519898515604688
+    second: convoyer_center_2
+  - first:
+      213: 6247274585842468122
+    second: convoyer_center_3
+  - first:
+      213: -427282983072032294
+    second: convoyer_center_4
+  - first:
+      213: 5455203826815307459
+    second: convoyer_center_5
+  - first:
+      213: -5109818577505360569
+    second: convoyer_center_6
+  - first:
+      213: 2119963344433259550
+    second: convoyer_center_7
+  - first:
+      213: 3810576410069108338
+    second: convoyer_center_8
+  - first:
+      213: -1126118096209317862
+    second: convoyer_right_1
+  - first:
+      213: 1768696024355884153
+    second: convoyer_right_2
+  - first:
+      213: -2163347743467975525
+    second: convoyer_right_3
+  - first:
+      213: 3017328239306347828
+    second: convoyer_right_4
+  - first:
+      213: 774568690574796275
+    second: convoyer_right_5
+  - first:
+      213: -5528228173893810620
+    second: convoyer_right_6
+  - first:
+      213: 1756284534446157293
+    second: convoyer_right_7
+  - first:
+      213: 8518954811034567692
+    second: convoyer_right_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -38,9 +110,9 @@ TextureImporter:
     filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -122,6 +194,510 @@ TextureImporter:
       bones: []
       spriteID: 4101e9d14e5787550800000000000000
       internalID: 6158802113039044628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_left_1
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3f2cd846dd4cf0b0800000000000000
+      internalID: -5693590246162419906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_left_2
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6580f3864c16f640800000000000000
+      internalID: 5113305516112643439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_left_3
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5be9fb350285a6780800000000000000
+      internalID: -8689035635190686027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_left_4
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3297897e8e8af1a90800000000000000
+      internalID: -7340963149319210717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_left_5
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f73b5d23989b614e0800000000000000
+      internalID: -2011216184659823745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_left_6
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11f7308c35527fd40800000000000000
+      internalID: 5618000101936168721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_left_7
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0280b470e8fdb75b0800000000000000
+      internalID: -5369452329608476640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_left_8
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e2e5f479f36e78a0800000000000000
+      internalID: -6305492505211837727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_center_1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 11
+        width: 16
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5768974b68d1ca50800000000000000
+      internalID: 6539746089192941403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_center_2
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 11
+        width: 16
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d488fd29cb6c8430800000000000000
+      internalID: 3786519898515604688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_center_3
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 11
+        width: 16
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a154777e227c2b650800000000000000
+      internalID: 6247274585842468122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_center_4
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 11
+        width: 16
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad91c67046cf11af0800000000000000
+      internalID: -427282983072032294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_center_5
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 11
+        width: 16
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ce8da24af6c4bb40800000000000000
+      internalID: 5455203826815307459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_center_6
+      rect:
+        serializedVersion: 2
+        x: 274
+        y: 11
+        width: 16
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 745e915a3174619b0800000000000000
+      internalID: -5109818577505360569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_center_7
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 11
+        width: 16
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e142bc10e6f9b6d10800000000000000
+      internalID: 2119963344433259550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_center_8
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 11
+        width: 16
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27607af3e03e1e430800000000000000
+      internalID: 3810576410069108338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_right_1
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a10fd44de893f50f0800000000000000
+      internalID: -1126118096209317862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_right_2
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97cc067c9abab8810800000000000000
+      internalID: 1768696024355884153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_right_3
+      rect:
+        serializedVersion: 2
+        x: 138
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9cc2f070be3af1e0800000000000000
+      internalID: -2163347743467975525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_right_4
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4351c921c04bfd920800000000000000
+      internalID: 3017328239306347828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_right_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f5a9d7ce12dfba00800000000000000
+      internalID: 774568690574796275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_right_6
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 446c0c104c9c743b0800000000000000
+      internalID: -5528228173893810620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_right_7
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dedec289a739f5810800000000000000
+      internalID: 1756284534446157293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: convoyer_right_8
+      rect:
+        serializedVersion: 2
+        x: 393
+        y: 11
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c040259e348693670800000000000000
+      internalID: 8518954811034567692
       vertices: []
       indices: 
       edges: []
