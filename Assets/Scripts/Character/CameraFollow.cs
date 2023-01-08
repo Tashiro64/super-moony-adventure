@@ -32,6 +32,9 @@ public class CameraFollow : MonoBehaviour
             desiredPosition = new Vector3( Mathf.Clamp(desiredPosition.x, CameraBoundaries.transform.position.x, 1000f) , desiredPosition.y, transform.position.z);
 
             transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothSpeed);
+        } else {
+            //if dead, stop camera from following character in case he's on a platform or anything that makes screen move
+            transform.parent = null;
         }
     }
 

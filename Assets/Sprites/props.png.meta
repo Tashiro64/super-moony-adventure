@@ -77,6 +77,36 @@ TextureImporter:
   - first:
       213: 8518954811034567692
     second: convoyer_right_8
+  - first:
+      213: -8778330639092187190
+    second: SpikeDown
+  - first:
+      213: -1677439461080083856
+    second: pacaneShuriken
+  - first:
+      213: -4708704120845580051
+    second: BurgerGrenade
+  - first:
+      213: -2202906833347639133
+    second: pacaneShuriken_frame_2
+  - first:
+      213: 2266321774201485983
+    second: pacaneShuriken_frame_3
+  - first:
+      213: -6699950694707107707
+    second: pacaneShuriken_frame_4
+  - first:
+      213: 6311769280165211270
+    second: pacaneShuriken_frame_5
+  - first:
+      213: 4152254151572483245
+    second: pacaneShuriken_frame_6
+  - first:
+      213: 5652200494349620312
+    second: pacaneShuriken_frame_7
+  - first:
+      213: 8746170207947903451
+    second: pacaneShuriken_frame_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -140,7 +170,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 8192
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -152,7 +182,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 8192
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -164,7 +194,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 8192
+    maxTextureSize: 16384
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -183,8 +213,8 @@ TextureImporter:
         serializedVersion: 2
         x: 1
         y: 1
-        width: 36
-        height: 7
+        width: 32
+        height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -698,6 +728,216 @@ TextureImporter:
       bones: []
       spriteID: c040259e348693670800000000000000
       internalID: 8518954811034567692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpikeDown
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 28
+        width: 16
+        height: 16
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acf7bf71bca1d2680800000000000000
+      internalID: -8778330639092187190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pacaneShuriken
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 34
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 072591692b988b8e0800000000000000
+      internalID: -1677439461080083856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BurgerGrenade
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 36
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de8c494cc8257aeb0800000000000000
+      internalID: -4708704120845580051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pacaneShuriken_frame_2
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 48
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a8880518e3bd61e0800000000000000
+      internalID: -2202906833347639133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pacaneShuriken_frame_3
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 48
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9a330a65a7937f10800000000000000
+      internalID: 2266321774201485983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pacaneShuriken_frame_4
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 48
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 588e95d475ef403a0800000000000000
+      internalID: -6699950694707107707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pacaneShuriken_frame_5
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 48
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68c687818b8e79750800000000000000
+      internalID: 6311769280165211270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pacaneShuriken_frame_6
+      rect:
+        serializedVersion: 2
+        x: 79
+        y: 48
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dac6e99b625cf9930800000000000000
+      internalID: 4152254151572483245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pacaneShuriken_frame_7
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 48
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8541ff82766a07e40800000000000000
+      internalID: 5652200494349620312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pacaneShuriken_frame_8
+      rect:
+        serializedVersion: 2
+        x: 107
+        y: 48
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd1d6d50773a06970800000000000000
+      internalID: 8746170207947903451
       vertices: []
       indices: 
       edges: []

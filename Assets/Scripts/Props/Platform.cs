@@ -42,7 +42,7 @@ public class Platform : MonoBehaviour
                 (direction == DirectionDropList.Horizontal ? transform.position.x + distance : transform.position.x),
                 (direction == DirectionDropList.Horizontal ? transform.position.y : transform.position.y + distance)
             ),
-            new Vector2(2.25f,0.4375f)
+            new Vector2(2f,0.5f)
         );
         Gizmos.color = new Color(1f,1f,0f,1f);
         Gizmos.DrawCube(
@@ -50,7 +50,7 @@ public class Platform : MonoBehaviour
                 (direction == DirectionDropList.Horizontal ? transform.position.x + distance : transform.position.x),
                 (direction == DirectionDropList.Horizontal ? transform.position.y : transform.position.y + distance)
             ),
-            new Vector2(2.13f,0.32f)
+            new Vector2(1.86f,0.37f)
         );
     }
 

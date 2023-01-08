@@ -89,8 +89,7 @@ public class Movement : MonoBehaviour
             if(!isRolling){
                 horizontalInput = Input.GetAxis("Horizontal");
                 verticalInput = Input.GetAxis("Vertical");
-            }
-            
+            }            
 
             Vector2 direction = new Vector2(horizontalInput, verticalInput);
             if(horizontalInput > 0){

@@ -107,12 +107,14 @@ public class TitleScreen : MonoBehaviour
             menu_breakTheTargets.SetActive(true);
             iTween.MoveTo(menu_main, iTween.Hash("position", new Vector3(-20f,0f,0f), "time", 0f, "easetype", iTween.EaseType.easeOutBack));
             iTween.MoveTo(menu_breakTheTargets, iTween.Hash("position", new Vector3(0f,0f,0f), "time", 0f, "easetype", iTween.EaseType.easeOutBack));
-            StartCoroutine(Fade());
             inBreakTheTargets = true;
             //menuPositionBreakTheTargets = 0;
             loadInBreakTheTarget = false;
         }
         loadInBreakTheTarget = false;
+        if(splashScreenDone){
+            StartCoroutine(Fade());
+        }
         
 
     }
@@ -477,7 +479,7 @@ public class TitleScreen : MonoBehaviour
                 if(menuPosition == 0){
 
                     Debug.Log("ADVENTURE MODE");
-                    SceneManager.LoadScene("adventureMode");
+                    SceneManager.LoadScene("TestLevel");
 
                 } else if(menuPosition == 1){
 

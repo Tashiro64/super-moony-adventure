@@ -24,8 +24,9 @@ public class Efouerring : MonoBehaviour
     }
 
     IEnumerator WaitBeforeRetry(){
-        
+        Movement.haveControl = false;
         yield return new WaitForSeconds(1f);
+        Config.Kill = true;
         ConfigBreakTheTarget.Kill = true;
         
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class Config : MonoBehaviour
 {
@@ -37,19 +38,25 @@ public class Config : MonoBehaviour
     public Sprite number_8;
     public Sprite number_9;
 
-    [Header("Pause Menu")]
+    [Header("Pause/Dead Menu")]
     public GameObject pauseMenu;
     public Image opt_continue;
     public Image opt_levelSelect;
     public Image opt_backToMenu;
     public int menuPausePosition = 0;
     public bool canMove = true;
+    public GameObject deadMenu;
+    public Image opt_dm_retry;
+    public Image opt_dm_levelSelect;
+    public Image opt_dm_backToMenu;
 
     [Header("Dynamic Prefab")]
     public GameObject prefab_PurpleWatsonCoin;
     public GameObject emptyGameObject;
 
     public static bool Kill = false;
+    public static bool GetDamaged = false;
+
     public static bool fnc_UpdateHealth = false;
     public static bool fnc_UpdateWatsonCoin = false;
     public static bool fnc_UpdateCoin = false;
@@ -57,6 +64,8 @@ public class Config : MonoBehaviour
     public static bool fnc_GotPurpleCoinSpawn = false;
     public static bool fnc_DeadCoroutine = false;
     public static bool fnc_isPaused = false;
+    public static bool fnc_GetDamaged = false;
+    public bool canPause = false;
 
     void Awake(){
               
@@ -67,6 +76,31 @@ public class Config : MonoBehaviour
         if(PlayerPrefs.GetInt("stage" + LevelId + "_wc3") == 1) { WatsonCoin_nb3 = 1; WatsonCoin++; }
         Config.fnc_UpdateWatsonCoin = true;
         Movement.haveControl = true;
+        Health = 3;
+        Config.fnc_DeadCoroutine = false;
+        ConfigBreakTheTarget.fnc_RetryCoroutine = false;
+        menuPausePosition = 0;
+        canPause = true;
+        Kill = false;
+        Time.timeScale = 1f;
+
+        Health = 3;
+        WatsonCoin = 0;
+        WatsonCoin_nb1 = 0;
+        WatsonCoin_nb2 = 0;
+        WatsonCoin_nb3 = 0;
+        PurpleWatsonCoin = 0;
+        Coin = 0;
+        Timer = 400;
+
+        fnc_UpdateHealth = false;
+        fnc_UpdateWatsonCoin = false;
+        fnc_UpdateCoin = false;
+        fnc_GotPurpleCoin = false;
+        fnc_GotPurpleCoinSpawn = false;
+        fnc_DeadCoroutine = false;
+        fnc_isPaused = false;
+        fnc_GetDamaged = false;
 
         //load volume data just in case
         AudioListener.volume = PlayerPrefs.GetFloat("global_volume");
@@ -75,6 +109,9 @@ public class Config : MonoBehaviour
 
     void Start()
     {
+        
+        deadMenu.SetActive(false);
+        
         Character = GameObject.Find("/Character/Sprite");
         DeathVerticalLimit = GameObject.Find("/Globals/DeathBoundaries").transform.position.y;
         StartCoroutine(TimerDown());
@@ -85,22 +122,68 @@ public class Config : MonoBehaviour
     {
 
         //Pause Config
-        if(!fnc_isPaused && !fnc_DeadCoroutine && Input.GetButtonDown("Start")){
-            Time.timeScale = 0f;
-            Movement.haveControl = false;
-            fnc_isPaused = true;
-            pauseMenu.SetActive(true);
-            AudioListener.volume = AudioListener.volume / 2;
-            menuPausePosition = 0;
-        } else if(fnc_isPaused && !fnc_DeadCoroutine && Input.GetButtonDown("Start")){
-            Time.timeScale = 1f;
-            pauseMenu.SetActive(false);
-            AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
-            fnc_isPaused = false;
-            Movement.haveControl = true;
+        if(canPause){
+            if(!fnc_isPaused && !fnc_DeadCoroutine && Input.GetButtonDown("Start")){
+                Time.timeScale = 0f;
+                Movement.haveControl = false;
+                fnc_isPaused = true;
+                pauseMenu.SetActive(true);
+                AudioListener.volume = AudioListener.volume / 2;
+                menuPausePosition = 0;
+            } else if(fnc_isPaused && !fnc_DeadCoroutine && Input.GetButtonDown("Start")){
+                Time.timeScale = 1f;
+                pauseMenu.SetActive(false);
+                AudioListener.volume = PlayerPrefs.GetFloat("global_volume",1);
+                fnc_isPaused = false;
+                Movement.haveControl = true;
+            }
         }
 
-        if(fnc_isPaused){
+        if(fnc_DeadCoroutine){
+            
+            if(Input.GetAxisRaw("Vertical") > 0 && canMove){
+                menuPausePosition--;
+                canMove = false;
+            }
+            if(Input.GetAxisRaw("Vertical") < 0 && canMove){
+                menuPausePosition++;
+                canMove = false;
+            }
+
+            if(menuPausePosition < 0){ menuPausePosition = 0; }
+            if(menuPausePosition > 2){ menuPausePosition = 2; }
+
+            if(Input.GetAxisRaw("Vertical") == 0 && !canMove){
+                canMove = true;
+            }
+
+            if(menuPausePosition == 0){
+                opt_dm_retry.color = new Color(0f,1f,0.78f,1f);
+                opt_dm_levelSelect.color = new Color(1f,1f,1f,1f);
+                opt_dm_backToMenu.color = new Color(1f,1f,1f,1f);
+            } else if(menuPausePosition == 1){
+                opt_dm_retry.color = new Color(1f,1f,1f,1f);
+                opt_dm_levelSelect.color = new Color(0f,1f,0.78f,1f);
+                opt_dm_backToMenu.color = new Color(1f,1f,1f,1f);
+            } else if(menuPausePosition == 2){
+                opt_dm_retry.color = new Color(1f,1f,1f,1f);
+                opt_dm_levelSelect.color = new Color(1f,1f,1f,1f);
+                opt_dm_backToMenu.color = new Color(0f,1f,0.78f,1f);
+            }
+            
+            if(Input.GetButtonDown("Submit")){
+                if(menuPausePosition == 0){
+                    SceneManager.LoadScene("TestLevel");
+                } else if(menuPausePosition == 1){
+                    TitleScreen.loadInBreakTheTarget = true;
+                    SceneManager.LoadScene("Scenes/TitleScreen");
+                } else if(menuPausePosition == 2){
+                    Time.timeScale = 1f;
+                    fnc_isPaused = false;
+                    SceneManager.LoadScene("Scenes/TitleScreen");
+                }
+            }
+        } else if(fnc_isPaused){
             
             if(Input.GetAxisRaw("Vertical") > 0 && canMove){
                 menuPausePosition--;
@@ -152,6 +235,9 @@ public class Config : MonoBehaviour
         //Kill Config
         if(!fnc_DeadCoroutine && Config.Kill){
             StartCoroutine(CallDeath());
+        }
+        if(!fnc_GetDamaged && Config.GetDamaged){
+            StartCoroutine(GetDamage());
         }
     }
 
@@ -302,9 +388,44 @@ public class Config : MonoBehaviour
     IEnumerator CallDeath(){
         Config.fnc_DeadCoroutine = true;
         Config.Health = 0;
-        Movement.haveControl = false;
         Config.fnc_UpdateHealth = true;
+
+        AudioListener.volume = AudioListener.volume / 2;
+        Kill = false;
+        deadMenu.SetActive(true);
+        menuPausePosition = 0;
+        Movement.haveControl = false;
         yield return new WaitForSeconds(0.3f);
+    }
+
+    IEnumerator GetDamage(){
+
+        fnc_GetDamaged = true; 
+
+        Debug.Log("DAMAGED");
+        Config.Health -= 1;
+        Config.fnc_UpdateHealth = true;
+
+        StartCoroutine(InvulnerabilityFrames());
+        
+        yield return new WaitForSeconds(1f);
+        Config.GetDamaged = false;
+        fnc_GetDamaged = false;
+        Config.Character.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,1f);
+        
+        Debug.Log("INV. FRAME END");
+
+    }
+
+    IEnumerator InvulnerabilityFrames(){
+        SpriteRenderer sprout = Config.Character.GetComponent<SpriteRenderer>();
+        while(fnc_GetDamaged){
+            sprout.color = new Color(1f,1f,1f,0.3f);
+            yield return new WaitForSeconds(0.05f);
+            sprout.color = new Color(1f,1f,1f,1f);
+            yield return new WaitForSeconds(0.05f);
+        }
+        sprout.color = new Color(1f,1f,1f,1f);
     }
 
 }

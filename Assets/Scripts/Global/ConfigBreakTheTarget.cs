@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityEngine.Tilemaps;
 using TMPro;
 
 public class ConfigBreakTheTarget : MonoBehaviour
@@ -67,7 +68,7 @@ public class ConfigBreakTheTarget : MonoBehaviour
     public static bool fnc_UpdateTarget = false;
     public static bool fnc_RetryCoroutine = false;
     public bool fnc_Completed = false;
-    public bool fnc_isPaused = false;
+    public static bool fnc_isPaused = false;
     public bool canPause = false;
     public bool runTimer = false;
     public bool canFillName = false;
@@ -78,11 +79,14 @@ public class ConfigBreakTheTarget : MonoBehaviour
 
     void Start()
     {
+
         TargetBroken = 0;
-        fnc_RetryCoroutine = false;
+        ConfigBreakTheTarget.fnc_RetryCoroutine = false;
+        Config.fnc_DeadCoroutine = false;
         Movement.haveControl = false;
         deadMenu.SetActive(false);
         menuPausePosition = 0;
+        ConfigBreakTheTarget.fnc_isPaused = false;
         canPause = false;
         Kill = false;
         Time.timeScale = 1f;

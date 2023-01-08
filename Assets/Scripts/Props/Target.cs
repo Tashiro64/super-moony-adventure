@@ -10,7 +10,7 @@ public class Target : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other) {
         
-        if(other.gameObject.tag == "Player" && !got){
+        if((other.gameObject.tag == "Player" || other.gameObject.tag == "PacaneShuriken") && !got){
             Spawn.SetActive(true);
             ConfigBreakTheTarget.TargetBroken++;
             GameObject.Find("/Canvas/Targets/target"+ConfigBreakTheTarget.TargetBroken).SetActive(false);

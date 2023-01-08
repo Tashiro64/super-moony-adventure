@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 4620783804167025404}
   - component: {fileID: 4101682682519171309}
   - component: {fileID: 5340364092530164852}
-  - component: {fileID: 6548937327600289316}
-  - component: {fileID: 1666080626096541107}
   - component: {fileID: 4967496629987422465}
   - component: {fileID: 6554284683278432585}
   - component: {fileID: 6809612648501426755}
+  - component: {fileID: 6548937327600289316}
+  - component: {fileID: 1666080626096541107}
+  - component: {fileID: 6844653581372103755}
   m_Layer: 8
   m_Name: Sprite
   m_TagString: Player
@@ -187,48 +188,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &6548937327600289316
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103120799005615175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b45ffddbcaf6ab74babed0d619d45ca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicSource: {fileID: 5340364092530164852}
-  musicStart: {fileID: 8300000, guid: 1fd626b614ddd2540828b20b909f1d50, type: 3}
---- !u!114 &1666080626096541107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1103120799005615175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2c8f43fcd294234f929c76e10d09818, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 6.9
-  jumpForce: 22
-  jumpStartTime: 0
-  rollForce: 22
-  horizontalInput: 0
-  verticalInput: 0
-  lockDirection: 0
-  rb: {fileID: 0}
-  sr: {fileID: 0}
-  anim: {fileID: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  groundCheck: {fileID: 4292642482870282322}
-  StageBackground: {fileID: 0}
-  Camera: {fileID: 4455693971789095184}
 --- !u!50 &4967496629987422465
 Rigidbody2D:
   serializedVersion: 4
@@ -295,6 +254,62 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6548937327600289316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103120799005615175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45ffddbcaf6ab74babed0d619d45ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSource: {fileID: 5340364092530164852}
+  musicStart: {fileID: 8300000, guid: 1fd626b614ddd2540828b20b909f1d50, type: 3}
+--- !u!114 &1666080626096541107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103120799005615175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2c8f43fcd294234f929c76e10d09818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 6.9
+  jumpForce: 22
+  jumpStartTime: 0
+  rollForce: 22
+  horizontalInput: 0
+  verticalInput: 0
+  lockDirection: 0
+  rb: {fileID: 0}
+  sr: {fileID: 0}
+  anim: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheck: {fileID: 4292642482870282322}
+  StageBackground: {fileID: 0}
+  Camera: {fileID: 4455693971789095184}
+--- !u!114 &6844653581372103755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103120799005615175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066abf12ea888e041b932fe0e160e241, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile_bullet: {fileID: 4643585390229142553, guid: 36c854e47cdcfd74b88c62eda50bc49d, type: 3}
+  projectile_burgers: {fileID: 0}
 --- !u!1 &4292642482870282322
 GameObject:
   m_ObjectHideFlags: 0

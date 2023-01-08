@@ -9,6 +9,18 @@ public class PurpleWatsonCoin : MonoBehaviour
 
     public Light2D Light;
     public bool CanGrabPurpleCoin = false;
+    private Rigidbody2D rb;
+
+    void Start(){
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    void Update(){
+        if(CanGrabPurpleCoin && !Config.fnc_GotPurpleCoin){
+            //convoyer belt fix
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D other) {
 

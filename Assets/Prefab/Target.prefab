@@ -115,6 +115,7 @@ GameObject:
   - component: {fileID: 354107774219942653}
   - component: {fileID: 2963646105364994141}
   - component: {fileID: 3958323874687814667}
+  - component: {fileID: 3252835415473256925}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -313,6 +314,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &3252835415473256925
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2663708788857245153}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 1
+  m_Constraints: 7
 --- !u!1 &5974069835348752234
 GameObject:
   m_ObjectHideFlags: 0
