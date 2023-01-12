@@ -1,30 +1,32 @@
 # super-moony-adventure
 
-## LevelId
-- 1 -> Stage 1
-- 2 -> Stage 2
-- 3 -> Stage 3
-- 4 -> Stage 4
-- 5 -> Stage 5
-- 6 -> Stage 6
-- 7 -> Stage 7
-- 8 -> Stage 8
+## remaining before adventure mode
+- animation moony qui tir
+- gérer quand mort animation/sprite 
+- break the target 3-4-5
+- ui armes + pitton pour switch
+- lancer des burgers
+- faire un item qui unlock les pacane ou les burgers (souvent avant les boss)
+- lottery
 
-- 10 -> Bonus Stage 1
-- 11 -> Bonus Stage 2
-- 12 -> Bonus Stage 3
-- 13 -> Bonus Stage 4
-
-- 15 -> Boss 1
-- 16 -> Boss 2
-- 17 -> Boss 3
-- 18 -> Boss 4
-- 19 -> Boss 5
-
-- 20 -> Break The Target 1
-- 21 -> Break The Target 2
-- 22 -> Break The Target 3
-- 23 -> Break The Target 4
-- 24 -> Break The Target 5
-
-- 25 -> Final Destination
+## 20 trophy
+1- moony
+2- une pacane
+3- un burger
+4- une snes
+5- noreset logo
+6- héro de burger time 
+7- leon RE sprite (https://images.squarespace-cdn.com/content/v1/5b0c2660297114545512fd73/1529816768891-5UWOYBC93ORGL132K6IR/RE2LEON.png?format=1500w)
+8- yé là
+9- pokey
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-

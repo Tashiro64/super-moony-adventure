@@ -13,7 +13,7 @@ public class Shoot : MonoBehaviour
 
         if(Movement.haveControl && !Config.fnc_isPaused && !ConfigBreakTheTarget.fnc_isPaused && !Movement.isRolling){
             if(Input.GetButtonDown("X")){
-                Instantiate(projectile_bullet, transform.position, Quaternion.identity);
+                Instantiate(projectile_bullet, new Vector2(transform.position.x, transform.position.y - 0.22f), Quaternion.identity);
             }
         }
 

@@ -10,9 +10,9 @@ public class ConvoyerBelt : MonoBehaviour
 
     public ConvoyerDirection direction;
     public Part part;
-    [Range(1,10)] public int size = 4;
+    [Range(1,30)] public int size = 4;
     [Range(0f,0.5f)] public float delay = 0.0335f;
-    [Range(0f,300f)] public float force = 90f;
+    [Range(0f,500f)] public float force = 90f;
     public GameObject clone;
 
     public Sprite sprite_convoyer_1;

@@ -852,11 +852,18 @@ public class TitleScreen : MonoBehaviour
         }
 
 
+
+        // special Target got & completed
+        if(PlayerPrefs.GetInt("gotSpecialTarget") == 1){
+            GlobalProgress++;
+        }
+
+
         //completion percentage
         float percent = Mathf.Ceil(GlobalProgress * 100 / totalPointNeeded);
 
         if(percent < 0) { percent = 0; }
-        if(percent > 100) { percent = 100; }
+        if(percent > 101) { percent = 101; }
         
         string col_percent = percent.ToString("000");
         string[] col_percentArray = new string[col_percent.Length];

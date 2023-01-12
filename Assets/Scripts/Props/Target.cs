@@ -7,6 +7,7 @@ public class Target : MonoBehaviour
 
     public GameObject Spawn;
     public bool got = false;
+    public bool isSpecialTarget = false;
     
     void OnTriggerEnter2D(Collider2D other) {
         
@@ -17,6 +18,9 @@ public class Target : MonoBehaviour
             GetComponent<AudioSource>().Play();
             transform.position = new Vector3(1000f,1000f,0);
             got = true;
+            if(isSpecialTarget){
+                PlayerPrefs.SetInt("gotSpecialTarget", 1);
+            }
         }
 
     }

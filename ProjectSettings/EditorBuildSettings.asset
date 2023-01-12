@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BreakTheTarget/Stage2.unity
     guid: 929d79290154f774997b017c9bf19552
+  - enabled: 1
+    path: Assets/Scenes/BreakTheTarget/Stage3.unity
+    guid: aa706c9e1657523458e6018c71752505
+  - enabled: 1
+    path: Assets/Scenes/BreakTheTarget/Stage4.unity
+    guid: 83d26e932efe2394b833d211da73b807
   m_configObjects: {}

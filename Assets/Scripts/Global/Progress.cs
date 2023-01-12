@@ -105,6 +105,7 @@ public class Progress : MonoBehaviour
             PlayerPrefs.SetInt("global_finalDestination_completed", 0);
             PlayerPrefs.SetInt("global_breakTheTarget_unlocked", 0);
             PlayerPrefs.SetFloat("global_volume", 1f);
+            PlayerPrefs.SetInt("gotSpecialTarget", 0);
 
             PlayerPrefs.SetInt("continue", 1);
         } else {

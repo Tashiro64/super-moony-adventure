@@ -107,6 +107,9 @@ TextureImporter:
   - first:
       213: 8746170207947903451
     second: pacaneShuriken_frame_8
+  - first:
+      213: 8808621820358217776
+    second: toxic
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -170,7 +173,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 16384
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -182,7 +185,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 16384
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -194,7 +197,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
-    maxTextureSize: 16384
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: 4
     textureCompression: 1
@@ -938,6 +941,27 @@ TextureImporter:
       bones: []
       spriteID: bd1d6d50773a06970800000000000000
       internalID: 8746170207947903451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: toxic
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 29
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 030d43320e28e3a70800000000000000
+      internalID: 8808621820358217776
       vertices: []
       indices: 
       edges: []

@@ -84,6 +84,7 @@ public class ConfigBreakTheTarget : MonoBehaviour
         ConfigBreakTheTarget.fnc_RetryCoroutine = false;
         Config.fnc_DeadCoroutine = false;
         Movement.haveControl = false;
+        Movement.facingDirection = 1;
         deadMenu.SetActive(false);
         menuPausePosition = 0;
         ConfigBreakTheTarget.fnc_isPaused = false;
@@ -434,6 +435,8 @@ public class ConfigBreakTheTarget : MonoBehaviour
         runTimer = false;
         Movement.haveControl = false;
         GameObject.Find("/Character/Sprite").GetComponent<Animator>().enabled = false;
+
+        PlayerPrefs.SetInt("breakTheTarget_"+LevelId+"_completed", 1);
         
         sfx.clip = sfx_complete;
         sfx.Play();
