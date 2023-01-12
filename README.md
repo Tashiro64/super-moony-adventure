@@ -10,15 +10,15 @@
 - lottery
 
 ## 20 trophy
-1- moony
-2- une pacane
-3- un burger
-4- une snes
-5- noreset logo
-6- héro de burger time 
-7- leon RE sprite (https://images.squarespace-cdn.com/content/v1/5b0c2660297114545512fd73/1529816768891-5UWOYBC93ORGL132K6IR/RE2LEON.png?format=1500w)
-8- yé là
-9- pokey
+- moony
+- une pacane
+- un burger
+- une snes
+- noreset logo
+- héro de burger time 
+- leon RE sprite (https://images.squarespace-cdn.com/content/v1/5b0c2660297114545512fd73/1529816768891-5UWOYBC93ORGL132K6IR/RE2LEON.png?format=1500w)
+- yé là
+- pokey
 -
 -
 -
